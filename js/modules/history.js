@@ -47,6 +47,7 @@ class HistoryModule {
     if (!this.tableBodyEl) return;
     const { transactions } = store.getState();
 
+    // Filter pencarian dan urutkan transaksi terbaru di atas
     const filtered = transactions.filter(t => {
       const q = query.toLowerCase().trim();
       return t.id.toLowerCase().includes(q) || t.customerName.toLowerCase().includes(q);
