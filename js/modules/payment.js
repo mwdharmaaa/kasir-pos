@@ -189,3 +189,22 @@ class PaymentModule {
 }
 
 export const paymentModule = new PaymentModule();
+
+  renderQRISPanel() {
+    this.channelPanelEl.innerHTML = `
+      <div class="qris-panel-wrap">
+        <div class="qris-qr-box">
+          <div class="qris-fake-qr">
+            <span style="font-size: 4rem;">🏁</span>
+            <span style="font-size: 0.75rem; font-weight: bold; margin-top: 4px;">QRIS STANDAR NASIONAL</span>
+          </div>
+          <span class="qris-scan-hint">Scan kode QR di atas menggunakan aplikasi e-Wallet apa saja</span>
+        </div>
+        <div class="qris-status-box">
+          <span>Menunggu Pembayaran...</span>
+          <span class="qris-timer" id="qris-timer">04:59</span>
+        </div>
+      </div>
+    `;
+    this.validatePayment();
+  }
