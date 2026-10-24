@@ -180,8 +180,19 @@ class CartModule {
     this.calculateAllTotals(subtotal, discount, isTaxActive);
   }
 
+  /**
+   * Menghitung nilai PPN berdasarkan subtotal bersih setelah diskon
+   * @param {number} taxableAmount
+   * @param {boolean} isTaxActive
+   * @returns {number}
+   */
+  calculateTax(taxableAmount, isTaxActive) {
+    if (!isTaxActive || taxableAmount <= 0) return 0;
+    return Math.round(taxableAmount * APP_CONFIG.financial.defaultTaxRate);
+  }
+
   calculateAllTotals(subtotal, discount, isTaxActive) {
-    // Scaffold method
+    // Akan diintegrasikan dengan diskon dan grand total
   }
 
   setupListeners() {
