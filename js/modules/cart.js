@@ -233,7 +233,21 @@ class CartModule {
     }
   }
 
+  clearCart() {
+    const { cart } = store.getState();
+    if (cart.length === 0) return;
+
+    if (confirm('Apakah Anda yakin ingin mengosongkan seluruh keranjang belanja?')) {
+      store.setState({ cart: [] });
+      toast.show('Keranjang belanja berhasil dikosongkan', 'info');
+    }
+  }
+
   setupListeners() {
+    const btnClear = document.getElementById('btn-clear-cart');
+    if (btnClear) {
+      btnClear.addEventListener('click', () => this.clearCart());
+    }
     if (this.taxToggleEl) {
       this.taxToggleEl.addEventListener('change', (e) => {
         store.setState({ isTaxActive: e.target.checked });
