@@ -183,6 +183,58 @@
 
   <!-- Container Modal Popups -->
   <div id="modal-container">
+    <!-- Modal Kelola Produk & Stok (Inventory Management) -->
+    <div id="modal-inventory" class="pos-modal-backdrop" style="display: none;">
+      <div class="pos-modal-window inventory-modal-window">
+        <div class="pos-modal-header">
+          <h3 class="pos-modal-title">📦 Kelola Produk & Stok Gudang</h3>
+          <button class="modal-close-btn" data-close-modal>&times;</button>
+        </div>
+        <div class="pos-modal-body">
+          <!-- Form Tambah Produk Baru -->
+          <form id="form-add-product" class="inventory-form">
+            <h4 style="font-size: var(--text-sm); font-weight: 700;">Tambah Produk Baru</h4>
+            <div class="form-grid">
+              <input type="text" id="inv-name" placeholder="Nama Produk (wajib)" required>
+              <select id="inv-category" required>
+                <option value="makanan">Makanan</option>
+                <option value="minuman">Minuman</option>
+                <option value="snack">Snack</option>
+                <option value="sembako">Kebutuhan Harian</option>
+              </select>
+              <input type="number" id="inv-price" placeholder="Harga Jual (Rp)" required min="500">
+              <input type="number" id="inv-stock" placeholder="Jumlah Stok Awal" required min="0">
+              <input type="text" id="inv-barcode" placeholder="Barcode / SKU">
+              <input type="text" id="inv-icon" placeholder="Emoji Ikon (cth: 🍔)" value="📦" maxlength="4">
+            </div>
+            <button type="submit" class="btn-checkout-finish" style="align-self: flex-start; margin-top: var(--space-2);">
+              + Simpan Produk
+            </button>
+          </form>
+
+          <hr style="margin: var(--space-4) 0; border: none; border-top: 1px solid var(--border-color);">
+
+          <!-- Tabel Inventaris Produk -->
+          <h4 style="font-size: var(--text-sm); font-weight: 700; margin-bottom: var(--space-2);">Daftar Semua Produk</h4>
+          <div class="history-table-wrapper">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Ikon</th>
+                  <th>Nama Produk</th>
+                  <th>Kategori</th>
+                  <th>Harga</th>
+                  <th>Stok</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="inventory-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Modal Laporan & Analitik (Analytics & Reports) -->
     <div id="modal-analytics" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window analytics-modal-window">
