@@ -183,6 +183,43 @@
 
   <!-- Container Modal Popups -->
   <div id="modal-container">
+    <!-- Modal Laporan & Analitik (Analytics & Reports) -->
+    <div id="modal-analytics" class="pos-modal-backdrop" style="display: none;">
+      <div class="pos-modal-window analytics-modal-window">
+        <div class="pos-modal-header">
+          <h3 class="pos-modal-title">📊 Laporan & Analitik Penjualan</h3>
+          <button class="modal-close-btn" data-close-modal>&times;</button>
+        </div>
+        <div class="pos-modal-body">
+          <div class="analytics-metrics-grid">
+            <div class="metric-card">
+              <span class="metric-icon">💵</span>
+              <span class="metric-label">Total Omzet</span>
+              <span id="metric-total-revenue" class="metric-value">Rp 0</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-icon">🧾</span>
+              <span class="metric-label">Jumlah Transaksi</span>
+              <span id="metric-total-orders" class="metric-value">0</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-icon">📈</span>
+              <span class="metric-label">Rata-rata Transaksi</span>
+              <span id="metric-avg-order" class="metric-value">Rp 0</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-icon">✨</span>
+              <span class="metric-label">Estimasi Laba Kotor</span>
+              <span id="metric-gross-profit" class="metric-value">Rp 0</span>
+            </div>
+          </div>
+
+          <h4 style="margin: var(--space-4) 0 var(--space-2) 0; font-size: var(--text-sm);">🏆 5 Produk Paling Laris</h4>
+          <div id="top-selling-products-list" class="top-products-list"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Modal Riwayat Penjualan (Transaction History) -->
     <div id="modal-history" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window history-modal-window">
