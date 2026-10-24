@@ -1,0 +1,57 @@
+/* ==========================================================================
+   Print Stylesheet (@media print)
+   Mengisolasi elemen struk termal agar tercetak sempurna di printer kasir
+   dan menyembunyikan semua tombol navigasi antarmuka.
+   ========================================================================== */
+
+@media print {
+  /* Sembunyikan semua elemen aplikasi utama */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Tampilkan hanya area struk termal */
+  #modal-receipt,
+  #modal-receipt * {
+    visibility: visible;
+  }
+
+  #modal-receipt {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    background: none !important;
+    display: block !important;
+    padding: 0 !important;
+  }
+
+  .pos-modal-window {
+    border: none !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+  }
+
+  .pos-modal-header,
+  .pos-modal-footer {
+    display: none !important;
+  }
+
+  .pos-modal-body {
+    padding: 0 !important;
+  }
+
+  .thermal-receipt-paper {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  @page {
+    margin: 0;
+    size: auto;
+  }
+}
