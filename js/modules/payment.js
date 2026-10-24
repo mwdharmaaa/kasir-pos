@@ -208,3 +208,24 @@ export const paymentModule = new PaymentModule();
     `;
     this.validatePayment();
   }
+
+  renderCardPanel() {
+    const isDebit = this.selectedMethod === 'debit';
+    this.channelPanelEl.innerHTML = `
+      <div style="display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-2) 0;">
+        <div>
+          <label class="cash-label">${isDebit ? 'Nomor Kartu (4 Digit Terakhir):' : 'Nomor Referensi Transfer / Bank:'}</label>
+          <input 
+            type="text" 
+            id="card-ref-input" 
+            placeholder="${isDebit ? 'Contoh: 4921' : 'Contoh: BCA - 982341'}"
+            style="width: 100%; height: 44px;"
+          >
+        </div>
+        <p style="font-size: var(--text-xs); color: var(--text-muted);">
+          Pastikan bukti transaksi pembayaran EDC/Transfer sudah diverifikasi sebelum menyelesaikan.
+        </p>
+      </div>
+    `;
+    this.validatePayment();
+  }
