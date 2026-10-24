@@ -146,6 +146,10 @@ class ReceiptModule {
     if (this.btnPrint) {
       this.btnPrint.addEventListener('click', () => this.printReceipt());
     }
+
+    if (this.btnDownloadTxt) {
+      this.btnDownloadTxt.addEventListener('click', () => this.downloadAsText());
+    }
     if (this.modalEl) {
       const closeBtns = this.modalEl.querySelectorAll('[data-close-modal]');
       closeBtns.forEach(b => b.addEventListener('click', () => this.closeModal()));
@@ -154,3 +158,47 @@ class ReceiptModule {
 }
 
 export const receiptModule = new ReceiptModule();
+
+  /**
+   * Mengunduh struk dalam bentuk file teks (.txt) monospaced
+   */
+  downloadAsText() {
+    const trx = this.currentTransaction;
+    if (!trx) return;
+
+    const { store } = APP_CONFIG;
+    const separator = '----------------------------------------';
+    
+    let content = '';
+    content += `${store.name}\n`;
+    content += `${store.address}\n`;
+    content += `Telp: ${store.phone}\n`;
+    content += `${separator}\n`;
+    content += `No. Trx : ${trx.id}\n`;
+    content += `Waktu   : ${new Date(trx.date).toLocaleString('id-ID')}\n`;
+    content += `Pelanggan: ${trx.customerName}\n`;
+    content += `${separator}\n`;
+
+    trx.items.forEach(item => {
+      content += `${item.name}\n`;
+      content += `  ${item.qty} x ${formatRupiah(item.price)} = ${formatRupiah(item.price * item.qty)}\n`;
+    });
+
+    content += `${separator}\n`;
+    content += `Subtotal : ${formatRupiah(trx.subtotal)}\n`;
+    if (trx.discountAmount > 0) content += `Diskon   : -${formatRupiah(trx.discountAmount)}\n`;
+    if (trx.taxAmount > 0) content += `PPN (11%): ${formatRupiah(trx.taxAmount)}\n`;
+    content += `TOTAL    : ${formatRupiah(trx.grandTotal)}\n`;
+    content += `Bayar (${trx.paymentMethod}): ${formatRupiah(trx.cashReceived)}\n`;
+    content += `Kembali  : ${formatRupiah(trx.changeAmount)}\n`;
+    content += `${separator}\n`;
+    content += `${store.receiptFooter}\n`;
+
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `struk-${trx.id}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
