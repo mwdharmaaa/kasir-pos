@@ -30,7 +30,56 @@
 <body>
   <div class="app-wrapper">
     <!-- Header Navigation -->
-    <header id="app-header" class="app-header"></header>
+    <header id="app-header" class="app-header">
+      <div class="header-left">
+        <div class="store-badge">
+          <span class="store-icon">🛒</span>
+          <div class="store-info">
+            <h1 class="store-name" id="header-store-name">Warung Berkah POS</h1>
+            <span class="store-tagline" id="header-store-tagline">Kasir Siap Melayani</span>
+          </div>
+        </div>
+        <div class="date-time-widget">
+          <span id="live-clock" class="live-clock">00:00:00</span>
+          <span id="live-date" class="live-date">Memuat tanggal...</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <!-- Statistik Kilat Hari Ini -->
+        <div class="header-stat-chip" title="Total Transaksi Hari Ini">
+          <span class="stat-icon">🧾</span>
+          <div class="stat-meta">
+            <span class="stat-label">Transaksi</span>
+            <span id="stat-today-count" class="stat-value">0</span>
+          </div>
+        </div>
+        <div class="header-stat-chip" title="Total Omzet Hari Ini">
+          <span class="stat-icon">💰</span>
+          <div class="stat-meta">
+            <span class="stat-label">Omzet</span>
+            <span id="stat-today-revenue" class="stat-value">Rp 0</span>
+          </div>
+        </div>
+
+        <!-- Tombol Aksi Header -->
+        <button id="btn-open-history" class="header-btn" title="Riwayat Transaksi (F8)">
+          <span class="btn-icon">📜</span> Riwayat
+        </button>
+        <button id="btn-open-inventory" class="header-btn" title="Kelola Produk & Stok">
+          <span class="btn-icon">📦</span> Produk
+        </button>
+        <button id="btn-open-analytics" class="header-btn" title="Laporan & Ringkasan">
+          <span class="btn-icon">📊</span> Laporan
+        </button>
+        <button id="btn-open-settings" class="header-btn" title="Pengaturan Toko">
+          <span class="btn-icon">⚙️</span>
+        </button>
+        <button id="btn-toggle-theme" class="header-btn theme-toggle" title="Ganti Mode Gelap/Terang">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
+    </header>
 
     <!-- Main POS Workspace -->
     <main class="main-content">
