@@ -185,6 +185,10 @@ class PaymentModule {
       const closeBtns = this.modalEl.querySelectorAll('[data-close-modal]');
       closeBtns.forEach(b => b.addEventListener('click', () => this.closeModal()));
     }
+
+    if (this.btnSubmit) {
+      this.btnSubmit.addEventListener('click', () => this.processCheckout());
+    }
   }
 }
 
@@ -228,4 +232,63 @@ export const paymentModule = new PaymentModule();
       </div>
     `;
     this.validatePayment();
+  }
+
+  /**
+   * Menyelesaikan transaksi: mengurangi stok barang dan menyimpan riwayat
+   */
+  processCheckout() {
+    const { cart, products, customer, discount, isTaxActive, transactions } = store.getState();
+    if (cart.length === 0) return;
+
+    // 1. Potong stok setiap produk yang dibeli
+    const updatedProducts = products.map(p => {
+      const inCart = cart.find(c => c.id === p.id);
+      if (inCart) {
+        return { ...p, stock: Math.max(0, p.stock - inCart.qty) };
+      }
+      return p;
+    });
+
+    // 2. Kalkulasi detail finansial
+    const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+    const discAmount = discount.type === 'percentage' 
+      ? Math.round(subtotal * (discount.value / 100))
+      : Math.min(discount.value, subtotal);
+    const taxable = Math.max(0, subtotal - discAmount);
+    const taxAmount = isTaxActive ? Math.round(taxable * APP_CONFIG.financial.defaultTaxRate) : 0;
+    const grandTotal = taxable + taxAmount;
+
+    // 3. Bangun objek transaksi
+    const transaction = {
+      id: generateTransactionId(),
+      date: new Date().toISOString(),
+      customerName: customer.name || 'Pelanggan Umum',
+      customerNote: customer.note || '',
+      items: [...cart],
+      subtotal,
+      discountAmount: discAmount,
+      discountLabel: discount.label || '',
+      taxAmount,
+      grandTotal,
+      paymentMethod: this.selectedMethod,
+      cashReceived: this.selectedMethod === 'cash' ? this.cashReceived : grandTotal,
+      changeAmount: this.selectedMethod === 'cash' ? Math.max(0, this.changeAmount) : 0
+    };
+
+    // 4. Update State Store
+    store.setState({
+      products: updatedProducts,
+      transactions: [transaction, ...transactions],
+      cart: [], // Kosongkan keranjang
+      discount: { type: 'percentage', value: 0, label: 'Tidak ada diskon', code: '' }
+    });
+
+    sound.playSuccess();
+    toast.show(`Transaksi ${transaction.id} berhasil diselesaikan!`, 'success');
+
+    this.closeModal();
+
+    // Trigger event untuk menampilkan struk termal
+    window.dispatchEvent(new CustomEvent('pos:show-receipt', { detail: { transaction } }));
   }
