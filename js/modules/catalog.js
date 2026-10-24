@@ -146,6 +146,14 @@ class CatalogModule {
           }
         }
       });
+
+      // Deteksi Enter key (biasanya dikirim otomatis oleh pemindai barcode fisik)
+      this.searchInputEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          this.handleBarcodeScan(this.searchInputEl.value.trim());
+        }
+      });
     }
   }
 
