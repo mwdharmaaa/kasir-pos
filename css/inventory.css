@@ -1,0 +1,31 @@
+/* ==========================================================================
+   Inventory Management Modal Styles
+   ========================================================================== */
+
+.inventory-modal-window {
+  max-width: 780px;
+}
+
+.inventory-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background-color: var(--bg-surface-secondary);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+
+.stock-input-mini {
+  width: 60px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-align: center;
+  padding: 2px 4px;
+}
