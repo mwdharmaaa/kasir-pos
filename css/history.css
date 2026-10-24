@@ -1,0 +1,73 @@
+/* ==========================================================================
+   Sales History Styles
+   ========================================================================== */
+
+.history-modal-window {
+  max-width: 800px;
+}
+
+.history-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+#history-search-input {
+  flex: 1;
+  height: 40px;
+}
+
+.history-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-xs);
+  text-align: left;
+}
+
+.history-table th {
+  background-color: var(--bg-surface-secondary);
+  padding: var(--space-3);
+  font-weight: 700;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.history-table td {
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.history-table tr:hover {
+  background-color: var(--bg-surface-secondary);
+}
+
+.trx-id-mono {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+
+.pay-badge {
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+}
+
+.pay-badge-cash {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.pay-badge-qris {
+  background-color: #e0e7ff;
+  color: #3730a3;
+}
