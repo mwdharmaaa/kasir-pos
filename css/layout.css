@@ -1,0 +1,61 @@
+/* ==========================================================================
+   App Layout Grid (Two-column Cashier Workspace)
+   ========================================================================== */
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  flex: 1;
+  overflow: hidden;
+  height: calc(100vh - 64px);
+}
+
+/* Left Section: Catalog Area */
+.catalog-section {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-app);
+  overflow: hidden;
+  border-right: 1px solid var(--border-color);
+  padding: var(--space-4);
+  gap: var(--space-4);
+}
+
+/* Right Section: Cart & Billing Area */
+.cart-section {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-surface);
+  overflow: hidden;
+  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.03);
+}
+
+/* Responsive breakpoint for smaller screens / tablets */
+@media (max-width: 992px) {
+  .main-content {
+    grid-template-columns: 1fr;
+    height: auto;
+    overflow-y: auto;
+  }
+
+  html, body {
+    overflow: auto;
+  }
+
+  .catalog-section {
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .cart-section {
+    min-height: 500px;
+  }
+}
