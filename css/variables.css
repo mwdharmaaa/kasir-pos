@@ -1,8 +1,3 @@
-/* ==========================================================================
-   CSS Custom Properties (Design Tokens)
-   Semua variabel warna, ukuran font, spasi, dan bayangan didefinisikan di sini.
-   ========================================================================== */
-
 :root {
   /* Palet Warna Primer (Emerald POS Modern) */
   --color-primary: #10b981;

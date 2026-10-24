@@ -1,7 +1,3 @@
-/* ==========================================================================
-   Toast Notification Styles & Keyframe Animations
-   ========================================================================== */
-
 .toast-container {
   position: fixed;
   top: var(--space-5);
