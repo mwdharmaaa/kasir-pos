@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kasir Pintar POS - Point of Sale Modern</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- Modular Stylesheets -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
@@ -29,7 +27,7 @@
 </head>
 <body>
   <div class="app-wrapper">
-    <!-- Header Navigation -->
+    
     <header id="app-header" class="app-header">
       <div class="header-left">
         <div class="store-badge">
@@ -46,7 +44,7 @@
       </div>
 
       <div class="header-right">
-        <!-- Statistik Kilat Hari Ini -->
+        
         <div class="header-stat-chip" title="Total Transaksi Hari Ini">
           <span class="stat-icon">TRX</span>
           <div class="stat-meta">
@@ -62,7 +60,6 @@
           </div>
         </div>
 
-        <!-- Tombol Aksi Header -->
         <button id="btn-open-history" class="header-btn" title="Riwayat Transaksi (F8)">
           Riwayat
         </button>
@@ -84,11 +81,10 @@
       </div>
     </header>
 
-    <!-- Main POS Workspace -->
     <main class="main-content">
-      <!-- Sisi Kiri: Katalog & Produk -->
+      
       <section id="catalog-section" class="catalog-section">
-        <!-- Bilah Pencarian & Barcode -->
+        
         <div class="catalog-toolbar">
           <div class="search-box">
             <span class="search-icon">CARI</span>
@@ -98,18 +94,15 @@
           <button id="btn-refresh-catalog" class="catalog-action-btn" title="Muat Ulang Katalog">Segarkan</button>
         </div>
 
-        <!-- Filter Tab Kategori -->
         <div class="categories-bar" id="categories-bar"></div>
 
-        <!-- Grid Kartu Produk -->
         <div class="products-grid-container">
           <div class="products-grid" id="products-grid"></div>
         </div>
       </section>
 
-      <!-- Sisi Kanan: Keranjang & Tagihan -->
       <section id="cart-section" class="cart-section">
-        <!-- Header Keranjang & Data Pelanggan -->
+        
         <div class="cart-header">
           <div class="cart-header-top">
             <h2 class="cart-title">
@@ -132,12 +125,10 @@
           </div>
         </div>
 
-        <!-- Daftar Item Belanja (Scrollable) -->
         <div class="cart-items-wrapper">
           <div id="cart-items-list" class="cart-items-list"></div>
         </div>
 
-        <!-- Footer Ringkasan Pembayaran & Tombol Bayar -->
         <div class="cart-footer">
           <div class="calculation-row">
             <span class="calc-label">Subtotal</span>
@@ -179,12 +170,10 @@
     </main>
   </div>
 
-  <!-- Container Notifikasi Toast -->
   <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
-  <!-- Container Modal Popups -->
   <div id="modal-container">
-    <!-- Modal Pengaturan Toko (Store Settings) -->
+    
     <div id="modal-settings" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window" style="max-width: 500px;">
         <div class="pos-modal-header">
@@ -218,7 +207,6 @@
       </div>
     </div>
 
-    <!-- Modal Kelola Produk & Stok (Inventory Management) -->
     <div id="modal-inventory" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window inventory-modal-window">
         <div class="pos-modal-header">
@@ -226,7 +214,7 @@
           <button class="modal-close-btn" data-close-modal>&times;</button>
         </div>
         <div class="pos-modal-body">
-          <!-- Form Tambah Produk Baru -->
+          
           <form id="form-add-product" class="inventory-form">
             <h4 style="font-size: var(--text-sm); font-weight: 700;">Tambah Produk Baru</h4>
             <div class="form-grid">
@@ -249,7 +237,6 @@
 
           <hr style="margin: var(--space-4) 0; border: none; border-top: 1px solid var(--border-color);">
 
-          <!-- Tabel Inventaris Produk -->
           <h4 style="font-size: var(--text-sm); font-weight: 700; margin-bottom: var(--space-2);">Daftar Semua Produk</h4>
           <div class="history-table-wrapper">
             <table class="history-table">
@@ -270,7 +257,6 @@
       </div>
     </div>
 
-    <!-- Modal Laporan & Analitik (Analytics & Reports) -->
     <div id="modal-analytics" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window analytics-modal-window">
         <div class="pos-modal-header">
@@ -307,7 +293,6 @@
       </div>
     </div>
 
-    <!-- Modal Riwayat Penjualan (Transaction History) -->
     <div id="modal-history" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window history-modal-window">
         <div class="pos-modal-header">
@@ -338,7 +323,6 @@
       </div>
     </div>
 
-    <!-- Modal Struk Belanja Kasir (Thermal Receipt) -->
     <div id="modal-receipt" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window receipt-modal-window">
         <div class="pos-modal-header">
@@ -355,7 +339,6 @@
       </div>
     </div>
 
-    <!-- Modal Pembayaran (Payment Gateway) -->
     <div id="modal-payment" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window payment-modal-window">
         <div class="pos-modal-header">
@@ -368,10 +351,8 @@
             <span id="pay-sum-total" class="pay-sum-amount">Rp 0</span>
           </div>
 
-          <!-- Pilihan Metode Pembayaran -->
           <div class="payment-methods-grid" id="payment-methods-grid"></div>
 
-          <!-- Panel Detail Metode (Tunai / QRIS / Kartu) -->
           <div class="payment-channel-panel" id="payment-channel-panel"></div>
         </div>
         <div class="pos-modal-footer">
@@ -383,7 +364,6 @@
       </div>
     </div>
 
-    <!-- Modal Pesanan Ditahan (Hold Orders) -->
     <div id="modal-held-orders" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window">
         <div class="pos-modal-header">
@@ -396,7 +376,6 @@
       </div>
     </div>
 
-    <!-- Modal Pilihan Diskon & Promo -->
     <div id="modal-discount" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window" style="max-width: 440px;">
         <div class="pos-modal-header">
@@ -421,7 +400,6 @@
       </div>
     </div>
 
-    <!-- Modal Panduan Tombol Pintas (Shortcuts Guide) -->
     <div id="modal-shortcuts" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window" style="max-width: 520px;">
         <div class="pos-modal-header">
@@ -451,7 +429,6 @@
     </div>
   </div>
 
-  <!-- Core Scripts -->
   <script type="module" src="js/app.js"></script>
 </body>
 </html>

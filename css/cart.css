@@ -66,7 +66,6 @@
   font-size: var(--text-xs);
 }
 
-/* Cart Items Scroll Area */
 .cart-items-wrapper {
   flex: 1;
   overflow-y: auto;
@@ -100,7 +99,6 @@
   font-weight: 500;
 }
 
-/* Cart Item Rows */
 .cart-item-row {
   display: flex;
   align-items: center;
@@ -166,7 +164,6 @@
   flex-shrink: 0;
 }
 
-/* Stepper Quantity */
 .qty-stepper {
   display: flex;
   align-items: center;
@@ -219,7 +216,6 @@
   color: var(--color-danger);
 }
 
-/* Cart Footer & Financial Calculations */
 .cart-footer {
   padding: var(--space-4);
   border-top: 1px solid var(--border-color);
@@ -269,7 +265,6 @@
   background-color: #c7d2fe;
 }
 
-/* Toggle Switch */
 .toggle-switch {
   position: relative;
   display: inline-block;
@@ -334,7 +329,6 @@ input:checked + .slider:before {
   color: var(--color-primary-dark);
 }
 
-/* Big Checkout Button */
 .btn-checkout {
   margin-top: var(--space-2);
   width: 100%;

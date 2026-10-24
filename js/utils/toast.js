@@ -1,8 +1,3 @@
-/**
- * @file toast.js
- * @description Utilitas notifikasi pop-up ringan untuk memberi informasi instan kepada kasir.
- */
-
 class ToastManager {
   constructor() {
     this.container = null;
@@ -15,12 +10,6 @@ class ToastManager {
     return this.container;
   }
 
-  /**
-   * Menampilkan pesan notifikasi pop-up di layar
-   * @param {string} message - Teks pesan
-   * @param {'success'|'danger'|'warning'|'info'} [type='info'] - Jenis pesan
-   * @param {number} [duration=3000] - Durasi tampil dalam milidetik
-   */
   show(message, type = 'info', duration = 3000) {
     const container = this._getContainer();
     if (!container) return;
@@ -42,7 +31,6 @@ class ToastManager {
       <button class="toast-close" aria-label="Tutup notifikasi">&times;</button>
     `;
 
-    // Tombol close manual
     const closeBtn = toastElement.querySelector('.toast-close');
     closeBtn.addEventListener('click', () => {
       this._dismiss(toastElement);
@@ -50,12 +38,10 @@ class ToastManager {
 
     container.appendChild(toastElement);
 
-    // Animasi masuk
     requestAnimationFrame(() => {
       toastElement.classList.add('toast-show');
     });
 
-    // Auto dismiss
     if (duration > 0) {
       setTimeout(() => {
         this._dismiss(toastElement);

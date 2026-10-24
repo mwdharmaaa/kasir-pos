@@ -1,10 +1,3 @@
-/**
- * @file cart.js
- * @description Modul pengelola keranjang belanja:
- * Menangani penambahan produk, pengaturan kuantitas, kalkulasi diskon & PPN,
- * serta penghitungan grand total.
- */
-
 import { store } from '../state/state.js';
 import { APP_CONFIG } from '../config.js';
 import { formatRupiah } from '../utils/formatters.js';
@@ -42,27 +35,15 @@ class CartModule {
     this.renderCart();
     this.setupListeners();
 
-    // Dengarkan event add-to-cart dari modul katalog / scanner
     window.addEventListener('pos:add-to-cart', (e) => {
       this.addToCart(e.detail.productId);
     });
 
-    // Subscribe ke perubahan state
     store.subscribe(() => {
       this.renderCart();
     });
   }
 
-  /**
-   * Menambahkan produk ke keranjang berdasarkan ID produk
-   * @param {string} productId
-   */
-  /**
-   * Memeriksa apakah penambahan kuantitas masih dalam batas stok gudang
-   * @param {Object} product
-   * @param {number} desiredQty
-   * @returns {boolean}
-   */
   canAddMoreStock(product, desiredQty) {
     return desiredQty <= product.stock;
   }
@@ -114,7 +95,6 @@ class CartModule {
     if (!this.cartListEl) return;
     const { cart } = store.getState();
 
-    // Hitung total kuantitas item
     const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
     if (this.itemCountBadgeEl) {
       this.itemCountBadgeEl.textContent = `${totalItems} item`;
@@ -159,11 +139,6 @@ class CartModule {
     this.updateFinancialSummary();
   }
 
-  /**
-   * Menghitung subtotal dari seluruh baris barang belanjaan
-   * @param {Array} cart
-   * @returns {number}
-   */
   calculateSubtotal(cart) {
     return cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
   }
@@ -176,27 +151,14 @@ class CartModule {
       this.subtotalEl.textContent = formatRupiah(subtotal);
     }
 
-    // Perhitungan diskon, pajak, dan grand total akan disambung di commit berikutnya
     this.calculateAllTotals(subtotal, discount, isTaxActive);
   }
 
-  /**
-   * Menghitung nilai PPN berdasarkan subtotal bersih setelah diskon
-   * @param {number} taxableAmount
-   * @param {boolean} isTaxActive
-   * @returns {number}
-   */
   calculateTax(taxableAmount, isTaxActive) {
     if (!isTaxActive || taxableAmount <= 0) return 0;
     return Math.round(taxableAmount * APP_CONFIG.financial.defaultTaxRate);
   }
 
-  /**
-   * Menghitung potongan nominal dari diskon aktif
-   * @param {number} subtotal
-   * @param {Object} discount
-   * @returns {number}
-   */
   calculateDiscountAmount(subtotal, discount) {
     if (!discount || discount.value <= 0 || subtotal <= 0) return 0;
 
@@ -265,7 +227,6 @@ class CartModule {
       const closeBtns = modalDiscount.querySelectorAll('[data-close-modal]');
       closeBtns.forEach(b => b.addEventListener('click', () => this.closeDiscountModal()));
 
-      // Presets 0%, 5%, 10%, 20%
       modalDiscount.querySelectorAll('.btn-preset-discount').forEach(btn => {
         btn.addEventListener('click', () => {
           const val = Number(btn.dataset.val);
@@ -283,7 +244,6 @@ class CartModule {
         });
       });
 
-      // Kupon promo
       const btnApply = document.getElementById('btn-apply-coupon');
       const inputCoupon = document.getElementById('coupon-code-input');
       if (btnApply && inputCoupon) {

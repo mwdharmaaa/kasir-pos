@@ -1,8 +1,3 @@
-/**
- * @file header.js
- * @description Mengelola pembaruan jam digital, info toko, dan widget statistik di header.
- */
-
 import { formatIndonesianDate, formatTime24h } from '../utils/date-helpers.js';
 import { formatRupiah } from '../utils/formatters.js';
 import { store } from '../state/state.js';
@@ -18,7 +13,6 @@ class HeaderModule {
     this.startLiveClock();
     this.updateStats();
 
-    // Subscribe ke perubahan transaksi di state untuk update omzet instan
     store.subscribe((state) => {
       this.updateStats(state.transactions);
     });
@@ -51,7 +45,6 @@ class HeaderModule {
 
     if (!countEl || !revEl) return;
 
-    // Filter transaksi hanya hari ini (YYYY-MM-DD yang sama)
     const todayStr = new Date().toISOString().slice(0, 10);
     const todayTrx = transactions.filter(t => t.date && t.date.startsWith(todayStr));
 
@@ -64,7 +57,6 @@ class HeaderModule {
 
 export const headerModule = new HeaderModule();
 
-// Ekspor fungsi bantuan untuk sinkronisasi stat secara manual jika diperlukan
 export function refreshHeaderStats() {
   headerModule.updateStats();
 }

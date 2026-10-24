@@ -1,10 +1,3 @@
-/**
- * @file hold.js
- * @description Modul Tahan Pesanan (Hold Bill / Pending Orders).
- * Memungkinkan kasir menahan pesanan saat ini (misal pelanggan mengambil barang tambahan)
- * dan melayani pelanggan lain terlebih dahulu.
- */
-
 import { store } from '../state/state.js';
 import { sound } from '../utils/sound.js';
 import { toast } from '../utils/toast.js';
@@ -92,9 +85,6 @@ class HoldModule {
     }
   }
 
-  /**
-   * Menahan pesanan saat ini dan menyimpannya ke daftar heldOrders
-   */
   holdCurrentOrder() {
     const { cart, customer, heldOrders } = store.getState();
     if (cart.length === 0) {
@@ -114,17 +104,13 @@ class HoldModule {
 
     store.setState({
       heldOrders: [newHold, ...heldOrders],
-      cart: [] // Kosongkan keranjang aktif
+      cart: []
     });
 
     sound.playBeep();
     toast.show(`Pesanan #${orderId} berhasil ditahan sementara`, 'info');
   }
 
-  /**
-   * Mengembalikan pesanan yang ditahan ke keranjang aktif
-   * @param {string} holdId
-   */
   resumeHeldOrder(holdId) {
     const { heldOrders, cart } = store.getState();
     const orderToResume = heldOrders.find(o => o.id === holdId);
@@ -149,10 +135,6 @@ class HoldModule {
     toast.show(`Pesanan #${holdId} dipulihkan ke keranjang`, 'success');
   }
 
-  /**
-   * Menghapus pesanan yang ditahan
-   * @param {string} holdId
-   */
   deleteHeldOrder(holdId) {
     const { heldOrders } = store.getState();
     store.setState({

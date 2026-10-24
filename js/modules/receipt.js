@@ -1,10 +1,3 @@
-/**
- * @file receipt.js
- * @description Modul Struk Termal Kasir.
- * Menghasilkan struk belanja bergaya kertas printer thermal 58mm/80mm,
- * menangani pencetakan window.print(), dan pengunduhan struk dalam bentuk teks.
- */
-
 import { APP_CONFIG } from '../config.js';
 import { formatRupiah } from '../utils/formatters.js';
 import { formatIndonesianDate, formatTime24h } from '../utils/date-helpers.js';
@@ -26,7 +19,6 @@ class ReceiptModule {
 
     this.setupListeners();
 
-    // Dengarkan event tampilkan struk
     window.addEventListener('pos:show-receipt', (e) => {
       this.showReceipt(e.detail.transaction);
     });
@@ -142,9 +134,6 @@ class ReceiptModule {
     window.print();
   }
 
-  /**
-   * Mengunduh struk dalam bentuk file teks (.txt) monospaced
-   */
   downloadAsText() {
     const trx = this.currentTransaction;
     if (!trx) return;

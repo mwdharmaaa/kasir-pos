@@ -1,9 +1,3 @@
-/**
- * @file settings.js
- * @description Modul Pengaturan Toko.
- * Memungkinkan pengubahan nama toko, alamat, nomor telepon, dan catatan kaki struk.
- */
-
 import { APP_CONFIG } from '../config.js';
 import { toast } from '../utils/toast.js';
 import { exportImportModule } from './export-import.js';

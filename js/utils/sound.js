@@ -1,18 +1,9 @@
-/**
- * @file sound.js
- * @description Generator efek suara menggunakan Web Audio API murni.
- * Tanpa perlu file MP3/WAV eksternal, kita mensintesis nada langsung dari browser.
- */
-
 class SoundEffects {
   constructor() {
     this.audioCtx = null;
     this.isMuted = false;
   }
 
-  /**
-   * Menginisialisasi AudioContext secara aman saat ada interaksi pengguna
-   */
   _getContext() {
     if (!this.audioCtx && typeof window !== 'undefined') {
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -26,9 +17,6 @@ class SoundEffects {
     return this.audioCtx;
   }
 
-  /**
-   * Memainkan nada sederhana (sine wave beep) saat scan atau tambah barang
-   */
   playBeep() {
     if (this.isMuted) return;
     try {
@@ -39,7 +27,7 @@ class SoundEffects {
       const gain = ctx.createGain();
 
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(880, ctx.currentTime); // Nada A5 (880Hz)
+      osc.frequency.setValueAtTime(880, ctx.currentTime);
       gain.gain.setValueAtTime(0.08, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
 
@@ -53,16 +41,13 @@ class SoundEffects {
     }
   }
 
-  /**
-   * Memainkan nada akord lonceng sukses kasir (Chime Checkout Success)
-   */
   playSuccess() {
     if (this.isMuted) return;
     try {
       const ctx = this._getContext();
       if (!ctx) return;
 
-      const freqs = [523.25, 659.25, 783.99, 1046.50]; // Akord C Major (C5, E5, G5, C6)
+      const freqs = [523.25, 659.25, 783.99, 1046.50];
       freqs.forEach((freq, idx) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
@@ -84,9 +69,6 @@ class SoundEffects {
     }
   }
 
-  /**
-   * Memainkan nada peringatan error (stok habis / uang kurang)
-   */
   playError() {
     if (this.isMuted) return;
     try {

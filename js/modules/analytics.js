@@ -1,10 +1,3 @@
-/**
- * @file analytics.js
- * @description Modul Laporan dan Analitik Keuangan.
- * Menghitung metrik performa toko: Omzet, Rata-rata Penjualan, Estimasi Margin Laba,
- * dan Top 5 Produk Terlaris.
- */
-
 import { store } from '../state/state.js';
 import { formatRupiah } from '../utils/formatters.js';
 
@@ -37,7 +30,6 @@ class AnalyticsModule {
     const totalRevenue = transactions.reduce((sum, t) => sum + t.grandTotal, 0);
     const avgOrder = totalOrders > 0 ? Math.round(totalRevenue / totalOrders) : 0;
 
-    // Estimasi Laba Kotor (Harga Jual - Harga Pokok Modal)
     let totalCost = 0;
     transactions.forEach(t => {
       t.items.forEach(item => {
@@ -63,7 +55,6 @@ class AnalyticsModule {
     const container = document.getElementById('top-selling-products-list');
     if (!container) return;
 
-    // Agregasi kuantitas terjual per nama produk
     const productSalesMap = {};
     transactions.forEach(t => {
       t.items.forEach(item => {

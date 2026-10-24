@@ -72,7 +72,6 @@
   color: var(--text-muted);
 }
 
-/* Stat Chips in Header */
 .header-stat-chip {
   display: flex;
   align-items: center;
@@ -111,7 +110,6 @@
   color: var(--text-main);
 }
 
-/* Header Buttons */
 .header-btn {
   display: inline-flex;
   align-items: center;
