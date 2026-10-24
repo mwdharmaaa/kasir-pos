@@ -132,6 +132,21 @@ class CatalogModule {
         this.selectCategory(categoryId);
       });
     }
+
+    if (this.searchInputEl) {
+      this.searchInputEl.addEventListener('input', (e) => {
+        const query = e.target.value;
+        store.setState({ searchQuery: query });
+
+        if (this.clearSearchBtn) {
+          if (query.trim().length > 0) {
+            this.clearSearchBtn.classList.add('active');
+          } else {
+            this.clearSearchBtn.classList.remove('active');
+          }
+        }
+      });
+    }
   }
 
   selectCategory(categoryId) {
