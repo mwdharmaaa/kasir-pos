@@ -84,7 +84,27 @@
     <!-- Main POS Workspace -->
     <main class="main-content">
       <!-- Sisi Kiri: Katalog & Produk -->
-      <section id="catalog-section" class="catalog-section"></section>
+      <section id="catalog-section" class="catalog-section">
+        <!-- Bilah Pencarian & Barcode -->
+        <div class="catalog-toolbar">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" placeholder="Cari nama produk atau scan barcode... (F2)" autocomplete="off">
+            <button id="btn-clear-search" class="clear-search-btn" title="Hapus pencarian">&times;</button>
+          </div>
+          <button id="btn-refresh-catalog" class="catalog-action-btn" title="Muat Ulang Katalog">
+            🔄
+          </button>
+        </div>
+
+        <!-- Filter Tab Kategori -->
+        <div class="categories-bar" id="categories-bar"></div>
+
+        <!-- Grid Kartu Produk -->
+        <div class="products-grid-container">
+          <div class="products-grid" id="products-grid"></div>
+        </div>
+      </section>
 
       <!-- Sisi Kanan: Keranjang & Tagihan -->
       <section id="cart-section" class="cart-section"></section>
