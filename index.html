@@ -107,7 +107,74 @@
       </section>
 
       <!-- Sisi Kanan: Keranjang & Tagihan -->
-      <section id="cart-section" class="cart-section"></section>
+      <section id="cart-section" class="cart-section">
+        <!-- Header Keranjang & Data Pelanggan -->
+        <div class="cart-header">
+          <div class="cart-header-top">
+            <h2 class="cart-title">
+              <span>🧾 Tagihan Kasir</span>
+              <span id="cart-item-count-badge" class="cart-badge">0 item</span>
+            </h2>
+            <div class="cart-header-actions">
+              <button id="btn-hold-cart" class="cart-tool-btn" title="Tahan / Simpan Nota Sementara (F4)">
+                ⏸️ Tahan
+              </button>
+              <button id="btn-clear-cart" class="cart-tool-btn text-danger" title="Kosongkan Keranjang">
+                🗑️ Bersihkan
+              </button>
+            </div>
+          </div>
+
+          <div class="customer-info-box">
+            <input type="text" id="customer-name-input" placeholder="Nama Pelanggan (opsional)" value="Pelanggan Umum">
+            <input type="text" id="customer-table-input" placeholder="No. Meja / Catatan">
+          </div>
+        </div>
+
+        <!-- Daftar Item Belanja (Scrollable) -->
+        <div class="cart-items-wrapper">
+          <div id="cart-items-list" class="cart-items-list"></div>
+        </div>
+
+        <!-- Footer Ringkasan Pembayaran & Tombol Bayar -->
+        <div class="cart-footer">
+          <div class="calculation-row">
+            <span class="calc-label">Subtotal</span>
+            <span id="cart-subtotal" class="calc-value">Rp 0</span>
+          </div>
+
+          <div class="calculation-row discount-row">
+            <div class="discount-label-wrap">
+              <span class="calc-label">Diskon</span>
+              <button id="btn-edit-discount" class="pill-action-btn">Pilih Promo</button>
+            </div>
+            <span id="cart-discount" class="calc-value text-success">- Rp 0</span>
+          </div>
+
+          <div class="calculation-row">
+            <div class="tax-label-wrap">
+              <label class="toggle-switch">
+                <input type="checkbox" id="tax-toggle" checked>
+                <span class="slider"></span>
+              </label>
+              <span class="calc-label">PPN (11%)</span>
+            </div>
+            <span id="cart-tax" class="calc-value">Rp 0</span>
+          </div>
+
+          <div class="divider-dashed"></div>
+
+          <div class="calculation-row grand-total-row">
+            <span class="grand-label">Total Pembayaran</span>
+            <span id="cart-grand-total" class="grand-value">Rp 0</span>
+          </div>
+
+          <button id="btn-open-payment" class="btn-checkout" disabled>
+            <span class="btn-checkout-label">Bayar Pesanan (F9)</span>
+            <span id="btn-checkout-total" class="btn-checkout-price">Rp 0</span>
+          </button>
+        </div>
+      </section>
     </main>
   </div>
 
