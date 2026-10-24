@@ -159,8 +159,29 @@ class CartModule {
     this.updateFinancialSummary();
   }
 
+  /**
+   * Menghitung subtotal dari seluruh baris barang belanjaan
+   * @param {Array} cart
+   * @returns {number}
+   */
+  calculateSubtotal(cart) {
+    return cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  }
+
   updateFinancialSummary() {
-    // Akan diimplementasikan di commit berikutnya untuk subtotal, diskon, PPN, dan grand total
+    const { cart, discount, isTaxActive } = store.getState();
+    const subtotal = this.calculateSubtotal(cart);
+
+    if (this.subtotalEl) {
+      this.subtotalEl.textContent = formatRupiah(subtotal);
+    }
+
+    // Perhitungan diskon, pajak, dan grand total akan disambung di commit berikutnya
+    this.calculateAllTotals(subtotal, discount, isTaxActive);
+  }
+
+  calculateAllTotals(subtotal, discount, isTaxActive) {
+    // Scaffold method
   }
 
   setupListeners() {
