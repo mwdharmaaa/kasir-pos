@@ -83,7 +83,26 @@ class HistoryModule {
     `).join('');
   }
 
+  setupTableActions() {
+    if (!this.tableBodyEl) return;
+    this.tableBodyEl.addEventListener('click', (e) => {
+      const reprintBtn = e.target.closest('.btn-reprint');
+      const voidBtn = e.target.closest('.btn-void');
+
+      if (reprintBtn) {
+        const { transactions } = store.getState();
+        const trx = transactions.find(t => t.id === reprintBtn.dataset.id);
+        if (trx) {
+          window.dispatchEvent(new CustomEvent('pos:show-receipt', { detail: { transaction: trx } }));
+        }
+      } else if (voidBtn) {
+        this.voidTransaction(voidBtn.dataset.id);
+      }
+    });
+  }
+
   setupListeners() {
+    this.setupTableActions();
     const btnOpen = document.getElementById('btn-open-history');
     if (btnOpen) {
       btnOpen.addEventListener('click', () => this.openModal());
