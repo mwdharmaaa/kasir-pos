@@ -60,7 +60,41 @@ class AnalyticsModule {
   }
 
   renderTopProducts(transactions) {
-    // Akan diimplementasikan untuk Top 5 produk
+    const container = document.getElementById('top-selling-products-list');
+    if (!container) return;
+
+    // Agregasi kuantitas terjual per nama produk
+    const productSalesMap = {};
+    transactions.forEach(t => {
+      t.items.forEach(item => {
+        productSalesMap[item.name] = (productSalesMap[item.name] || 0) + item.qty;
+      });
+    });
+
+    const sortedProducts = Object.entries(productSalesMap)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5);
+
+    if (sortedProducts.length === 0) {
+      container.innerHTML = `
+        <div style="text-align: center; color: var(--text-muted); padding: 1rem;">
+          Belum ada data produk terjual.
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = sortedProducts.map(([name, qty], idx) => `
+      <div class="top-product-item">
+        <div style="display: flex; align-items: center; gap: var(--space-2);">
+          <span class="top-product-rank">#${idx + 1}</span>
+          <span style="font-weight: 600;">${name}</span>
+        </div>
+        <span style="font-family: var(--font-mono); font-weight: 700; color: var(--color-primary-dark);">
+          ${qty} terjual
+        </span>
+      </div>
+    `).join('');
   }
 
   setupListeners() {
