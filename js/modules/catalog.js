@@ -122,7 +122,43 @@ class CatalogModule {
     }).join('');
   }
 
+  handleBarcodeScan(code) {
+    if (!code) return;
+    const { products } = store.getState();
+    const product = products.find(p => p.barcode === code || p.id === code);
+
+    if (product) {
+      if (product.stock <= 0) {
+        sound.playError();
+        toast.show(`Stok produk "${product.name}" sudah habis!`, 'danger');
+      } else {
+        // Trigger event custom untuk ditangkap oleh cartModule
+        window.dispatchEvent(new CustomEvent('pos:add-to-cart', { detail: { productId: product.id } }));
+        sound.playBeep();
+        toast.show(`Ditambahkan: ${product.name}`, 'success');
+        // Bersihkan input barcode setelah scan berhasil
+        this.clearSearch();
+      }
+    } else {
+      sound.playError();
+      toast.show(`Barcode "${code}" tidak ditemukan dalam sistem!`, 'warning');
+    }
+  }
+
+  clearSearch() {
+    if (this.searchInputEl) {
+      this.searchInputEl.value = '';
+    }
+    if (this.clearSearchBtn) {
+      this.clearSearchBtn.classList.remove('active');
+    }
+    store.setState({ searchQuery: '' });
+  }
+
   setupListeners() {
+    if (this.clearSearchBtn) {
+      this.clearSearchBtn.addEventListener('click', () => this.clearSearch());
+    }
     if (this.categoriesBarEl) {
       this.categoriesBarEl.addEventListener('click', (e) => {
         const btn = e.target.closest('.category-pill');
