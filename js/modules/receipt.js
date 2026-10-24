@@ -138,7 +138,14 @@ class ReceiptModule {
     }
   }
 
+  printReceipt() {
+    window.print();
+  }
+
   setupListeners() {
+    if (this.btnPrint) {
+      this.btnPrint.addEventListener('click', () => this.printReceipt());
+    }
     if (this.modalEl) {
       const closeBtns = this.modalEl.querySelectorAll('[data-close-modal]');
       closeBtns.forEach(b => b.addEventListener('click', () => this.closeModal()));
