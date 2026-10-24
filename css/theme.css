@@ -1,0 +1,33 @@
+/* ==========================================================================
+   Dark Mode Overrides
+   ========================================================================== */
+
+html.dark-theme {
+  --bg-app: #0f172a;
+  --bg-surface: #1e293b;
+  --bg-surface-secondary: #334155;
+  --bg-hover: #475569;
+  --border-color: #334155;
+
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-accent: #34d399;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.6);
+}
+
+html.dark-theme input,
+html.dark-theme select,
+html.dark-theme textarea {
+  background-color: var(--bg-surface-secondary);
+  border-color: var(--border-color);
+  color: var(--text-main);
+}
+
+html.dark-theme .header-btn {
+  background-color: var(--bg-surface-secondary);
+  color: var(--text-main);
+}
