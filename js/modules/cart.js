@@ -212,6 +212,16 @@ class CartModule {
       store.setState({ cart: updated });
     }
   }
+
+  removeItem(productId) {
+    const { cart } = store.getState();
+    const targetItem = cart.find(i => i.id === productId);
+    if (!targetItem) return;
+
+    const updated = cart.filter(i => i.id !== productId);
+    store.setState({ cart: updated });
+    toast.show(`"${targetItem.name}" dihapus dari keranjang`, 'info');
+  }
 }
 
 export const cartModule = new CartModule();
