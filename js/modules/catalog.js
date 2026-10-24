@@ -49,7 +49,66 @@ class CatalogModule {
   }
 
   renderProducts(state = store.getState()) {
-    // Akan diimplementasikan lebih detail di commit berikutnya
+    if (!this.productsGridEl) return;
+
+    const { products, activeCategory, searchQuery } = state;
+
+    // Filter berdasarkan kategori dan teks pencarian
+    const filteredProducts = products.filter(product => {
+      const matchCategory = activeCategory === 'all' || product.category === activeCategory;
+      const query = searchQuery.toLowerCase().trim();
+      const matchName = product.name.toLowerCase().includes(query);
+      const matchBarcode = product.barcode && product.barcode.includes(query);
+
+      return matchCategory && (matchName || matchBarcode);
+    });
+
+    if (filteredProducts.length === 0) {
+      this.productsGridEl.innerHTML = `
+        <div class="empty-catalog-state">
+          <span class="empty-icon">🔎</span>
+          <p class="empty-title">Produk Tidak Ditemukan</p>
+          <span class="empty-desc">Coba gunakan kata kunci lain atau pilih kategori lain.</span>
+        </div>
+      `;
+      return;
+    }
+
+    this.productsGridEl.innerHTML = filteredProducts.map(p => {
+      const isOutOfStock = p.stock <= 0;
+      const isLowStock = p.stock > 0 && p.stock <= 5;
+
+      return `
+        <div 
+          class="product-card ${isOutOfStock ? 'out-of-stock' : ''}" 
+          data-product-id="${p.id}"
+          tabindex="0"
+          role="button"
+          aria-label="${p.name}, harga ${formatRupiah(p.price)}"
+        >
+          <div class="product-icon-wrap">
+            <span class="product-icon">${p.icon || '📦'}</span>
+            <span class="stock-badge ${isOutOfStock ? 'badge-danger' : (isLowStock ? 'badge-warning' : 'badge-normal')}">
+              ${isOutOfStock ? 'Habis' : `Stok: ${p.stock}`}
+            </span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name" title="${p.name}">${p.name}</h3>
+            <span class="product-barcode">${p.barcode}</span>
+            <div class="product-footer">
+              <span class="product-price">${formatRupiah(p.price)}</span>
+              <button 
+                class="btn-add-product" 
+                ${isOutOfStock ? 'disabled' : ''} 
+                title="${isOutOfStock ? 'Stok habis' : 'Tambah ke keranjang'}"
+              >
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
   }
 
   setupListeners() {
