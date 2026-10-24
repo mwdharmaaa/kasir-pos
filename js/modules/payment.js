@@ -87,7 +87,85 @@ class PaymentModule {
   }
 
   renderChannelPanel() {
-    // Akan diimplementasikan untuk tiap mode (Tunai, QRIS, dll)
+    if (!this.channelPanelEl) return;
+
+    if (this.selectedMethod === 'cash') {
+      this.renderCashPanel();
+    } else if (this.selectedMethod === 'qris') {
+      this.renderQRISPanel();
+    } else {
+      this.renderCardPanel();
+    }
+  }
+
+  renderCashPanel() {
+    this.cashReceived = this.currentTotal; // Default uang pas
+    this.changeAmount = 0;
+
+    this.channelPanelEl.innerHTML = `
+      <div class="cash-input-group">
+        <label for="cash-received-input" class="cash-label">Uang Tunai yang Diterima:</label>
+        <input 
+          type="text" 
+          id="cash-received-input" 
+          class="cash-received-input" 
+          value="${this.cashReceived}" 
+          autocomplete="off"
+        >
+      </div>
+
+      <div class="quick-cash-chips" id="quick-cash-chips"></div>
+
+      <div class="change-display-box" id="change-display-box">
+        <span class="change-label">Uang Kembalian:</span>
+        <span id="cash-change-amount" class="change-amount">Rp 0</span>
+      </div>
+    `;
+
+    this.renderQuickCashChips();
+    this.setupCashListeners();
+    this.validatePayment();
+  }
+
+  setupCashListeners() {
+    const input = document.getElementById('cash-received-input');
+    if (input) {
+      input.focus();
+      input.select();
+      input.addEventListener('input', (e) => {
+        const parsed = parseRupiah(e.target.value);
+        this.cashReceived = parsed;
+        this.updateChangeCalculation();
+      });
+    }
+  }
+
+  updateChangeCalculation() {
+    const changeEl = document.getElementById('cash-change-amount');
+    const changeBox = document.getElementById('change-display-box');
+
+    this.changeAmount = this.cashReceived - this.currentTotal;
+
+    if (changeEl) {
+      if (this.changeAmount < 0) {
+        changeEl.textContent = `Kurang ${formatRupiah(Math.abs(this.changeAmount))}`;
+        changeEl.classList.add('text-danger');
+      } else {
+        changeEl.textContent = formatRupiah(this.changeAmount);
+        changeEl.classList.remove('text-danger');
+      }
+    }
+
+    this.validatePayment();
+  }
+
+  validatePayment() {
+    if (!this.btnSubmit) return;
+    if (this.selectedMethod === 'cash') {
+      this.btnSubmit.disabled = this.cashReceived < this.currentTotal;
+    } else {
+      this.btnSubmit.disabled = false;
+    }
   }
 
   setupListeners() {
