@@ -57,6 +57,16 @@ class CartModule {
    * Menambahkan produk ke keranjang berdasarkan ID produk
    * @param {string} productId
    */
+  /**
+   * Memeriksa apakah penambahan kuantitas masih dalam batas stok gudang
+   * @param {Object} product
+   * @param {number} desiredQty
+   * @returns {boolean}
+   */
+  canAddMoreStock(product, desiredQty) {
+    return desiredQty <= product.stock;
+  }
+
   addToCart(productId) {
     const { products, cart } = store.getState();
     const product = products.find(p => p.id === productId);
