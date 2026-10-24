@@ -292,3 +292,8 @@ export const paymentModule = new PaymentModule();
     // Trigger event untuk menampilkan struk termal
     window.dispatchEvent(new CustomEvent('pos:show-receipt', { detail: { transaction } }));
   }
+
+export function getLastTransaction() {
+  const { transactions } = store.getState();
+  return transactions && transactions.length ? transactions[0] : null;
+}
