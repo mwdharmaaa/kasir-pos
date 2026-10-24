@@ -234,6 +234,13 @@ class CartModule {
   }
 
   setupListeners() {
+    if (this.taxToggleEl) {
+      this.taxToggleEl.addEventListener('change', (e) => {
+        store.setState({ isTaxActive: e.target.checked });
+        sound.playBeep();
+      });
+    }
+
     if (this.cartListEl) {
       this.cartListEl.addEventListener('click', (e) => {
         const incBtn = e.target.closest('.btn-qty-increase');
