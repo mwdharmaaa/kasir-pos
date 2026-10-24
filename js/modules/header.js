@@ -63,3 +63,8 @@ class HeaderModule {
 }
 
 export const headerModule = new HeaderModule();
+
+// Ekspor fungsi bantuan untuk sinkronisasi stat secara manual jika diperlukan
+export function refreshHeaderStats() {
+  headerModule.updateStats();
+}
