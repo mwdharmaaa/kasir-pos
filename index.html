@@ -183,6 +183,37 @@
 
   <!-- Container Modal Popups -->
   <div id="modal-container">
+    <!-- Modal Riwayat Penjualan (Transaction History) -->
+    <div id="modal-history" class="pos-modal-backdrop" style="display: none;">
+      <div class="pos-modal-window history-modal-window">
+        <div class="pos-modal-header">
+          <h3 class="pos-modal-title">📜 Riwayat Transaksi Penjualan</h3>
+          <button class="modal-close-btn" data-close-modal>&times;</button>
+        </div>
+        <div class="pos-modal-body">
+          <div class="history-toolbar">
+            <input type="text" id="history-search-input" placeholder="Cari ID transaksi atau nama pelanggan...">
+            <button id="btn-export-csv" class="cart-tool-btn">📥 Ekspor CSV</button>
+          </div>
+          <div class="history-table-wrapper">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>ID Transaksi</th>
+                  <th>Waktu</th>
+                  <th>Pelanggan</th>
+                  <th>Total</th>
+                  <th>Metode</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="history-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Modal Struk Belanja Kasir (Thermal Receipt) -->
     <div id="modal-receipt" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window receipt-modal-window">
