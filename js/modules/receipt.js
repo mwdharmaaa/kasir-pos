@@ -83,7 +83,59 @@ class ReceiptModule {
   }
 
   renderItemsAndTotals(trx) {
-    // Akan diisi baris rincian barang dan kalkulasi
+    const tableEl = document.getElementById('receipt-items-table');
+    const totalsEl = document.getElementById('receipt-total-section');
+
+    if (tableEl) {
+      tableEl.innerHTML = trx.items.map(item => `
+        <tr>
+          <td colspan="2" class="receipt-item-name">${item.name}</td>
+        </tr>
+        <tr>
+          <td class="receipt-item-sub">${item.qty} x ${formatRupiah(item.price)}</td>
+          <td align="right" class="receipt-item-sub">${formatRupiah(item.price * item.qty)}</td>
+        </tr>
+      `).join('');
+    }
+
+    if (totalsEl) {
+      totalsEl.innerHTML = `
+        <div class="receipt-total-row">
+          <span>Subtotal:</span>
+          <span>${formatRupiah(trx.subtotal)}</span>
+        </div>
+        ${trx.discountAmount > 0 ? `
+          <div class="receipt-total-row">
+            <span>Diskon:</span>
+            <span>- ${formatRupiah(trx.discountAmount)}</span>
+          </div>
+        ` : ''}
+        ${trx.taxAmount > 0 ? `
+          <div class="receipt-total-row">
+            <span>PPN (11%):</span>
+            <span>${formatRupiah(trx.taxAmount)}</span>
+          </div>
+        ` : ''}
+        <div class="receipt-total-row receipt-grand-row">
+          <span>TOTAL:</span>
+          <span>${formatRupiah(trx.grandTotal)}</span>
+        </div>
+        <div class="receipt-total-row">
+          <span>Metode Bayar:</span>
+          <span style="text-transform: uppercase;">${trx.paymentMethod}</span>
+        </div>
+        ${trx.paymentMethod === 'cash' ? `
+          <div class="receipt-total-row">
+            <span>Uang Diterima:</span>
+            <span>${formatRupiah(trx.cashReceived)}</span>
+          </div>
+          <div class="receipt-total-row">
+            <span>Kembalian:</span>
+            <span>${formatRupiah(trx.changeAmount)}</span>
+          </div>
+        ` : ''}
+      `;
+    }
   }
 
   setupListeners() {
