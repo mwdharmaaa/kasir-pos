@@ -53,7 +53,20 @@ class CatalogModule {
   }
 
   setupListeners() {
-    // Akan dihubungkan dengan event click kategori dan search input
+    if (this.categoriesBarEl) {
+      this.categoriesBarEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('.category-pill');
+        if (!btn) return;
+
+        const categoryId = btn.dataset.categoryId;
+        this.selectCategory(categoryId);
+      });
+    }
+  }
+
+  selectCategory(categoryId) {
+    store.setState({ activeCategory: categoryId });
+    this.renderCategories();
   }
 }
 
