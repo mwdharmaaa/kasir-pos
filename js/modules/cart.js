@@ -111,7 +111,56 @@ class CartModule {
   }
 
   renderCart() {
-    // Akan diimplementasikan baris demi baris di commit berikutnya
+    if (!this.cartListEl) return;
+    const { cart } = store.getState();
+
+    // Hitung total kuantitas item
+    const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+    if (this.itemCountBadgeEl) {
+      this.itemCountBadgeEl.textContent = `${totalItems} item`;
+    }
+
+    if (cart.length === 0) {
+      this.cartListEl.innerHTML = `
+        <div class="empty-cart-state">
+          <span class="empty-cart-icon">🛒</span>
+          <span class="empty-cart-text">Keranjang masih kosong</span>
+          <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">
+            Klik produk di sebelah kiri untuk menambah pesanan
+          </span>
+        </div>
+      `;
+      this.updateFinancialSummary();
+      return;
+    }
+
+    this.cartListEl.innerHTML = cart.map(item => `
+      <div class="cart-item-row" data-item-id="${item.id}">
+        <div class="cart-item-info">
+          <span class="cart-item-icon">${item.icon || '📦'}</span>
+          <div class="cart-item-meta">
+            <h4 class="cart-item-title">${item.name}</h4>
+            <span class="cart-item-single-price">${formatRupiah(item.price)}</span>
+          </div>
+        </div>
+
+        <div class="cart-item-actions">
+          <div class="qty-stepper">
+            <button class="btn-qty-decrease" data-id="${item.id}" title="Kurangi kuantitas">-</button>
+            <span class="qty-display">${item.qty}</span>
+            <button class="btn-qty-increase" data-id="${item.id}" title="Tambah kuantitas">+</button>
+          </div>
+          <span class="cart-item-subtotal">${formatRupiah(item.price * item.qty)}</span>
+          <button class="btn-remove-item" data-id="${item.id}" title="Hapus item">&times;</button>
+        </div>
+      </div>
+    `).join('');
+
+    this.updateFinancialSummary();
+  }
+
+  updateFinancialSummary() {
+    // Akan diimplementasikan di commit berikutnya untuk subtotal, diskon, PPN, dan grand total
   }
 
   setupListeners() {
