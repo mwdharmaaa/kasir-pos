@@ -76,8 +76,8 @@ class HistoryModule {
           </span>
         </td>
         <td>
-          <button class="cart-tool-btn btn-reprint" data-id="${t.id}" title="Cetak Ulang Struk">🖨️ Struk</button>
-          <button class="cart-tool-btn text-danger btn-void" data-id="${t.id}" title="Batalkan Transaksi">❌ Void</button>
+          <button class="cart-tool-btn btn-reprint" data-id="${t.id}" title="Cetak Ulang Struk">Struk</button>
+          <button class="cart-tool-btn text-danger btn-void" data-id="${t.id}" title="Batalkan Transaksi">Void</button>
         </td>
       </tr>
     `).join('');

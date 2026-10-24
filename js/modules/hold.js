@@ -47,7 +47,7 @@ class HoldModule {
     if (heldOrders.length === 0) {
       this.listEl.innerHTML = `
         <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
-          <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">📭</span>
+          
           Tidak ada pesanan yang sedang ditahan.
         </div>
       `;

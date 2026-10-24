@@ -65,7 +65,9 @@
 }
 
 .pay-method-icon {
-  font-size: 1.5rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
 }
 
 /* Finish Button */

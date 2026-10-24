@@ -26,10 +26,10 @@ class ToastManager {
     if (!container) return;
 
     const icons = {
-      success: '✅',
-      danger: '⚠️',
-      warning: '🔔',
-      info: 'ℹ️'
+      success: '[OK]',
+      danger: '[ERROR]',
+      warning: '[PERHATIAN]',
+      info: '[INFO]'
     };
 
     const toastElement = document.createElement('div');
@@ -37,7 +37,7 @@ class ToastManager {
     toastElement.setAttribute('role', 'alert');
 
     toastElement.innerHTML = `
-      <span class="toast-icon">${icons[type] || 'ℹ️'}</span>
+      <span class="toast-icon">${icons[type] || '[INFO]'}</span>
       <span class="toast-message">${message}</span>
       <button class="toast-close" aria-label="Tutup notifikasi">&times;</button>
     `;

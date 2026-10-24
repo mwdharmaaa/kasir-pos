@@ -5,11 +5,11 @@
  */
 
 export const INITIAL_CATEGORIES = [
-  { id: 'all', name: 'Semua Produk', icon: '📦' },
-  { id: 'makanan', name: 'Makanan', icon: '🍛' },
-  { id: 'minuman', name: 'Minuman', icon: '🧃' },
-  { id: 'snack', name: 'Camilan & Snack', icon: '🍿' },
-  { id: 'sembako', name: 'Kebutuhan Harian', icon: '🌾' }
+  { id: 'all', name: 'Semua Produk', icon: '' },
+  { id: 'makanan', name: 'Makanan', icon: '' },
+  { id: 'minuman', name: 'Minuman', icon: '' },
+  { id: 'snack', name: 'Camilan & Snack', icon: '' },
+  { id: 'sembako', name: 'Kebutuhan Harian', icon: '' }
 ];
 
 export const INITIAL_PRODUCTS = [
@@ -21,7 +21,7 @@ export const INITIAL_PRODUCTS = [
     costPrice: 9000,
     stock: 45,
     barcode: '8991001001',
-    icon: '☕',
+    icon: 'MNM',
     description: 'Espresso robusta dengan susu segar dan gula aren asli.'
   },
   {
@@ -32,7 +32,7 @@ export const INITIAL_PRODUCTS = [
     costPrice: 2000,
     stock: 80,
     barcode: '8991001002',
-    icon: '🧋',
+    icon: 'MNM',
     description: 'Teh melati seduh segar ukuran 22oz manis pas.'
   },
   {
@@ -43,7 +43,7 @@ export const INITIAL_PRODUCTS = [
     costPrice: 8000,
     stock: 30,
     barcode: '8991001003',
-    icon: '🍜',
+    icon: 'MKN',
     description: 'Mie goreng komplit dengan telur mata sapi dan sayuran.'
   },
   {
@@ -54,7 +54,7 @@ export const INITIAL_PRODUCTS = [
     costPrice: 11000,
     stock: 25,
     barcode: '8991001004',
-    icon: '🍚',
+    icon: 'MKN',
     description: 'Nasi goreng harum bumbu rempah dengan topping ayam dan kerupuk.'
   },
   {
@@ -65,7 +65,7 @@ export const INITIAL_PRODUCTS = [
     costPrice: 7500,
     stock: 18,
     barcode: '8991001005',
-    icon: '🥪',
+    icon: 'MKN',
     description: 'Roti tebal panggang lumer dengan meses coklat dan keju parut.'
   },
   {
@@ -76,7 +76,7 @@ export const INITIAL_PRODUCTS = [
     costPrice: 5000,
     stock: 40,
     barcode: '8991001006',
-    icon: '🍟',
+    icon: 'SNK',
     description: 'Keripik singkong renyah dengan balutan cabai balado pedas manis.'
   },
   {
@@ -87,7 +87,7 @@ export const INITIAL_PRODUCTS = [
     costPrice: 6000,
     stock: 35,
     barcode: '8991001007',
-    icon: '🥜',
+    icon: 'SNK',
     description: 'Kacang salut tepung gurih cocok untuk teman santai.'
   },
   {
@@ -98,7 +98,7 @@ export const INITIAL_PRODUCTS = [
     costPrice: 2200,
     stock: 120,
     barcode: '8991001008',
-    icon: '💧',
+    icon: 'MNM',
     description: 'Air mineral pegunungan alami segar.'
   },
   {
@@ -109,7 +109,7 @@ export const INITIAL_PRODUCTS = [
     costPrice: 16500,
     stock: 5, // Stok sedikit untuk tes status low-stock
     barcode: '8991001009',
-    icon: '🍳',
+    icon: 'SBK',
     description: 'Minyak goreng kelapa sawit murni kualitas premium.'
   },
   {
@@ -120,7 +120,7 @@ export const INITIAL_PRODUCTS = [
     costPrice: 15000,
     stock: 0, // Stok habis untuk tes guard stok kosong
     barcode: '8991001010',
-    icon: '🧂',
+    icon: 'SBK',
     description: 'Gula tebu putih higienis manis alami.'
   },
   {
@@ -131,7 +131,7 @@ export const INITIAL_PRODUCTS = [
     costPrice: 65000,
     stock: 15,
     barcode: '8991001011',
-    icon: '🌾',
+    icon: '',
     description: 'Beras pandan wangi pulen, bersih dari kutu dan batu.'
   },
   {
@@ -142,7 +142,7 @@ export const INITIAL_PRODUCTS = [
     costPrice: 7500,
     stock: 28,
     barcode: '8991001012',
-    icon: '🍪',
+    icon: 'SNK',
     description: 'Biskuit renyah sandwich krim coklat lezat.'
   }
 ];

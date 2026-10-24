@@ -20,7 +20,7 @@ import { exportImportModule } from './modules/export-import.js';
 
 class App {
   static init() {
-    console.log('%c🛒 Kasir POS Modern Siap Digunakan', 'color: #10b981; font-weight: bold; font-size: 14px;');
+    console.log('%cKasir POS Modern Siap Digunakan', 'color: #10b981; font-weight: bold; font-size: 14px;');
 
     // Inisialisasi setiap modul
     themeModule.init();

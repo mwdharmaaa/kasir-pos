@@ -48,7 +48,7 @@ class InventoryModule {
 
     this.tableBodyEl.innerHTML = products.map(p => `
       <tr>
-        <td style="font-size: 1.25rem;">${p.icon || '📦'}</td>
+        <td style="font-weight: 700; font-size: 0.75rem;">${p.icon || 'ITEM'}</td>
         <td style="font-weight: 600;">${p.name}</td>
         <td><span style="text-transform: capitalize;">${p.category}</span></td>
         <td>${formatRupiah(p.price)}</td>
@@ -63,7 +63,7 @@ class InventoryModule {
         </td>
         <td>
           <button class="cart-tool-btn text-danger btn-delete-product" data-id="${p.id}" title="Hapus Produk">
-            🗑️ Hapus
+            Hapus
           </button>
         </td>
       </tr>
@@ -131,7 +131,7 @@ class InventoryModule {
     const price = Number(document.getElementById('inv-price').value) || 0;
     const stock = Number(document.getElementById('inv-stock').value) || 0;
     const barcode = document.getElementById('inv-barcode').value.trim() || `899${Date.now().toString().slice(-7)}`;
-    const icon = document.getElementById('inv-icon').value.trim() || '📦';
+    const icon = document.getElementById('inv-icon').value.trim() || 'ITEM';
 
     if (!name || price <= 0) {
       toast.show('Mohon lengkapi nama dan harga produk yang valid', 'warning');

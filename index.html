@@ -33,7 +33,7 @@
     <header id="app-header" class="app-header">
       <div class="header-left">
         <div class="store-badge">
-          <span class="store-icon">🛒</span>
+          <span class="store-icon">POS</span>
           <div class="store-info">
             <h1 class="store-name" id="header-store-name">Warung Berkah POS</h1>
             <span class="store-tagline" id="header-store-tagline">Kasir Siap Melayani</span>
@@ -48,14 +48,14 @@
       <div class="header-right">
         <!-- Statistik Kilat Hari Ini -->
         <div class="header-stat-chip" title="Total Transaksi Hari Ini">
-          <span class="stat-icon">🧾</span>
+          <span class="stat-icon">TRX</span>
           <div class="stat-meta">
             <span class="stat-label">Transaksi</span>
             <span id="stat-today-count" class="stat-value">0</span>
           </div>
         </div>
         <div class="header-stat-chip" title="Total Omzet Hari Ini">
-          <span class="stat-icon">💰</span>
+          <span class="stat-icon">RP</span>
           <div class="stat-meta">
             <span class="stat-label">Omzet</span>
             <span id="stat-today-revenue" class="stat-value">Rp 0</span>
@@ -64,22 +64,22 @@
 
         <!-- Tombol Aksi Header -->
         <button id="btn-open-history" class="header-btn" title="Riwayat Transaksi (F8)">
-          <span class="btn-icon">📜</span> Riwayat
+          Riwayat
         </button>
         <button id="btn-open-inventory" class="header-btn" title="Kelola Produk & Stok">
-          <span class="btn-icon">📦</span> Produk
+          Produk
         </button>
         <button id="btn-open-analytics" class="header-btn" title="Laporan & Ringkasan">
-          <span class="btn-icon">📊</span> Laporan
+          Laporan
         </button>
         <button id="btn-open-shortcuts" class="header-btn" title="Daftar Shortcut Keyboard">
-          <span class="btn-icon">⌨️</span>
+          Bantuan
         </button>
         <button id="btn-open-settings" class="header-btn" title="Pengaturan Toko">
-          <span class="btn-icon">⚙️</span>
+          Setelan
         </button>
         <button id="btn-toggle-theme" class="header-btn theme-toggle" title="Ganti Mode Gelap/Terang">
-          <span id="theme-icon">🌙</span>
+          <span id="theme-icon">Mode</span>
         </button>
       </div>
     </header>
@@ -91,13 +91,11 @@
         <!-- Bilah Pencarian & Barcode -->
         <div class="catalog-toolbar">
           <div class="search-box">
-            <span class="search-icon">🔍</span>
+            <span class="search-icon">CARI</span>
             <input type="text" id="search-input" placeholder="Cari nama produk atau scan barcode... (F2)" autocomplete="off">
             <button id="btn-clear-search" class="clear-search-btn" title="Hapus pencarian">&times;</button>
           </div>
-          <button id="btn-refresh-catalog" class="catalog-action-btn" title="Muat Ulang Katalog">
-            🔄
-          </button>
+          <button id="btn-refresh-catalog" class="catalog-action-btn" title="Muat Ulang Katalog">Segarkan</button>
         </div>
 
         <!-- Filter Tab Kategori -->
@@ -115,15 +113,15 @@
         <div class="cart-header">
           <div class="cart-header-top">
             <h2 class="cart-title">
-              <span>🧾 Tagihan Kasir</span>
+              <span>Tagihan Kasir</span>
               <span id="cart-item-count-badge" class="cart-badge">0 item</span>
             </h2>
             <div class="cart-header-actions">
               <button id="btn-hold-cart" class="cart-tool-btn" title="Tahan / Simpan Nota Sementara (F4)">
-                ⏸️ Tahan
+                Tahan
               </button>
               <button id="btn-clear-cart" class="cart-tool-btn text-danger" title="Kosongkan Keranjang">
-                🗑️ Bersihkan
+                Bersihkan
               </button>
             </div>
           </div>
@@ -190,7 +188,7 @@
     <div id="modal-settings" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window" style="max-width: 500px;">
         <div class="pos-modal-header">
-          <h3 class="pos-modal-title">⚙️ Pengaturan Toko & POS</h3>
+          <h3 class="pos-modal-title">Pengaturan Toko & POS</h3>
           <button class="modal-close-btn" data-close-modal>&times;</button>
         </div>
         <div class="pos-modal-body">
@@ -213,7 +211,7 @@
             </div>
             <div style="margin-top: var(--space-2); display: flex; gap: var(--space-2);">
               <button type="submit" class="btn-checkout-finish">Simpan Perubahan</button>
-              <button type="button" id="btn-backup-json" class="cart-tool-btn">💾 Backup Data</button>
+              <button type="button" id="btn-backup-json" class="cart-tool-btn">Backup Data</button>
             </div>
           </form>
         </div>
@@ -224,7 +222,7 @@
     <div id="modal-inventory" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window inventory-modal-window">
         <div class="pos-modal-header">
-          <h3 class="pos-modal-title">📦 Kelola Produk & Stok Gudang</h3>
+          <h3 class="pos-modal-title">Kelola Produk & Stok Gudang</h3>
           <button class="modal-close-btn" data-close-modal>&times;</button>
         </div>
         <div class="pos-modal-body">
@@ -242,7 +240,7 @@
               <input type="number" id="inv-price" placeholder="Harga Jual (Rp)" required min="500">
               <input type="number" id="inv-stock" placeholder="Jumlah Stok Awal" required min="0">
               <input type="text" id="inv-barcode" placeholder="Barcode / SKU">
-              <input type="text" id="inv-icon" placeholder="Emoji Ikon (cth: 🍔)" value="📦" maxlength="4">
+              <input type="text" id="inv-icon" placeholder="Kode Kategori (cth: MKN)" value="ITEM" maxlength="4">
             </div>
             <button type="submit" class="btn-checkout-finish" style="align-self: flex-start; margin-top: var(--space-2);">
               + Simpan Produk
@@ -276,34 +274,34 @@
     <div id="modal-analytics" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window analytics-modal-window">
         <div class="pos-modal-header">
-          <h3 class="pos-modal-title">📊 Laporan & Analitik Penjualan</h3>
+          <h3 class="pos-modal-title">Laporan & Analitik Penjualan</h3>
           <button class="modal-close-btn" data-close-modal>&times;</button>
         </div>
         <div class="pos-modal-body">
           <div class="analytics-metrics-grid">
             <div class="metric-card">
-              <span class="metric-icon">💵</span>
+              
               <span class="metric-label">Total Omzet</span>
               <span id="metric-total-revenue" class="metric-value">Rp 0</span>
             </div>
             <div class="metric-card">
-              <span class="metric-icon">🧾</span>
+              
               <span class="metric-label">Jumlah Transaksi</span>
               <span id="metric-total-orders" class="metric-value">0</span>
             </div>
             <div class="metric-card">
-              <span class="metric-icon">📈</span>
+              
               <span class="metric-label">Rata-rata Transaksi</span>
               <span id="metric-avg-order" class="metric-value">Rp 0</span>
             </div>
             <div class="metric-card">
-              <span class="metric-icon">✨</span>
+              
               <span class="metric-label">Estimasi Laba Kotor</span>
               <span id="metric-gross-profit" class="metric-value">Rp 0</span>
             </div>
           </div>
 
-          <h4 style="margin: var(--space-4) 0 var(--space-2) 0; font-size: var(--text-sm);">🏆 5 Produk Paling Laris</h4>
+          <h4 style="margin: var(--space-4) 0 var(--space-2) 0; font-size: var(--text-sm);">5 Produk Paling Laris</h4>
           <div id="top-selling-products-list" class="top-products-list"></div>
         </div>
       </div>
@@ -313,13 +311,13 @@
     <div id="modal-history" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window history-modal-window">
         <div class="pos-modal-header">
-          <h3 class="pos-modal-title">📜 Riwayat Transaksi Penjualan</h3>
+          <h3 class="pos-modal-title">Riwayat Transaksi Penjualan</h3>
           <button class="modal-close-btn" data-close-modal>&times;</button>
         </div>
         <div class="pos-modal-body">
           <div class="history-toolbar">
             <input type="text" id="history-search-input" placeholder="Cari ID transaksi atau nama pelanggan...">
-            <button id="btn-export-csv" class="cart-tool-btn">📥 Ekspor CSV</button>
+            <button id="btn-export-csv" class="cart-tool-btn">Ekspor CSV</button>
           </div>
           <div class="history-table-wrapper">
             <table class="history-table">
@@ -344,15 +342,15 @@
     <div id="modal-receipt" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window receipt-modal-window">
         <div class="pos-modal-header">
-          <h3 class="pos-modal-title">🧾 Struk Belanja Pelanggan</h3>
+          <h3 class="pos-modal-title">Struk Belanja Pelanggan</h3>
           <button class="modal-close-btn" data-close-modal>&times;</button>
         </div>
         <div class="pos-modal-body">
           <div id="thermal-receipt-paper" class="thermal-receipt-paper"></div>
         </div>
         <div class="pos-modal-footer">
-          <button id="btn-download-receipt-txt" class="cart-tool-btn">💾 Unduh Teks</button>
-          <button id="btn-print-receipt" class="btn-checkout-finish">🖨️ Cetak Struk (Print)</button>
+          <button id="btn-download-receipt-txt" class="cart-tool-btn">Unduh Teks</button>
+          <button id="btn-print-receipt" class="btn-checkout-finish">Cetak Struk</button>
         </div>
       </div>
     </div>
@@ -361,7 +359,7 @@
     <div id="modal-payment" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window payment-modal-window">
         <div class="pos-modal-header">
-          <h3 class="pos-modal-title">💳 Selesaikan Pembayaran</h3>
+          <h3 class="pos-modal-title">Selesaikan Pembayaran</h3>
           <button class="modal-close-btn" data-close-modal>&times;</button>
         </div>
         <div class="pos-modal-body">
@@ -389,7 +387,7 @@
     <div id="modal-held-orders" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window">
         <div class="pos-modal-header">
-          <h3 class="pos-modal-title">⏸️ Daftar Pesanan Ditahan</h3>
+          <h3 class="pos-modal-title">Daftar Pesanan Ditahan</h3>
           <button class="modal-close-btn" data-close-modal>&times;</button>
         </div>
         <div class="pos-modal-body">

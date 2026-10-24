@@ -27,10 +27,10 @@ export const APP_CONFIG = {
 
   // Metode Pembayaran yang Didukung
   paymentMethods: [
-    { id: 'cash', name: 'Tunai (Cash)', icon: '💵', shortcut: '1' },
-    { id: 'qris', name: 'QRIS', icon: '📱', shortcut: '2' },
-    { id: 'debit', name: 'Kartu Debit/Kredit', icon: '💳', shortcut: '3' },
-    { id: 'transfer', name: 'Transfer Bank', icon: '🏦', shortcut: '4' }
+    { id: 'cash', name: 'Tunai (Cash)', icon: 'TUNAI', shortcut: '1' },
+    { id: 'qris', name: 'QRIS', icon: 'QRIS', shortcut: '2' },
+    { id: 'debit', name: 'Kartu Debit/Kredit', icon: 'KARTU', shortcut: '3' },
+    { id: 'transfer', name: 'Transfer Bank', icon: 'BANK', shortcut: '4' }
   ],
 
   // Tombol Uang Pas Bawaan untuk Pembayaran Tunai

@@ -42,7 +42,6 @@ class CatalogModule {
         class="category-pill ${cat.id === activeCategory ? 'active' : ''}" 
         data-category-id="${cat.id}"
       >
-        <span>${cat.icon}</span>
         <span>${cat.name}</span>
       </button>
     `).join('');
@@ -77,7 +76,7 @@ class CatalogModule {
     if (filteredProducts.length === 0) {
       this.productsGridEl.innerHTML = `
         <div class="empty-catalog-state">
-          <span class="empty-icon">🔎</span>
+          
           <p class="empty-title">Produk Tidak Ditemukan</p>
           <span class="empty-desc">Coba gunakan kata kunci lain atau pilih kategori lain.</span>
         </div>
@@ -98,7 +97,7 @@ class CatalogModule {
           aria-label="${p.name}, harga ${formatRupiah(p.price)}"
         >
           <div class="product-icon-wrap">
-            <span class="product-icon">${p.icon || '📦'}</span>
+            <span class="product-icon">${p.icon || 'ITEM'}</span>
             <span class="stock-badge ${isOutOfStock ? 'badge-danger' : (isLowStock ? 'badge-warning' : 'badge-normal')}">
               ${isOutOfStock ? 'Habis' : `Stok: ${p.stock}`}
             </span>

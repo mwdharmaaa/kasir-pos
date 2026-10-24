@@ -130,7 +130,9 @@
 }
 
 .cart-item-icon {
-  font-size: 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
   background-color: var(--bg-surface);
   width: 38px;
   height: 38px;

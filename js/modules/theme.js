@@ -34,10 +34,10 @@ class ThemeModule {
 
     if (theme === 'dark') {
       htmlEl.classList.add('dark-theme');
-      if (themeIcon) themeIcon.textContent = '☀️';
+      if (themeIcon) themeIcon.textContent = 'Terang';
     } else {
       htmlEl.classList.remove('dark-theme');
-      if (themeIcon) themeIcon.textContent = '🌙';
+      if (themeIcon) themeIcon.textContent = 'Gelap';
     }
   }
 }

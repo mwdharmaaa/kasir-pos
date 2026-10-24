@@ -123,7 +123,7 @@ class CartModule {
     if (cart.length === 0) {
       this.cartListEl.innerHTML = `
         <div class="empty-cart-state">
-          <span class="empty-cart-icon">🛒</span>
+          
           <span class="empty-cart-text">Keranjang masih kosong</span>
           <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">
             Klik produk di sebelah kiri untuk menambah pesanan
@@ -137,7 +137,7 @@ class CartModule {
     this.cartListEl.innerHTML = cart.map(item => `
       <div class="cart-item-row" data-item-id="${item.id}">
         <div class="cart-item-info">
-          <span class="cart-item-icon">${item.icon || '📦'}</span>
+          <span class="cart-item-icon">${item.icon || 'ITEM'}</span>
           <div class="cart-item-meta">
             <h4 class="cart-item-title">${item.name}</h4>
             <span class="cart-item-single-price">${formatRupiah(item.price)}</span>
