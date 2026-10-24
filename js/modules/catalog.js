@@ -48,6 +48,17 @@ class CatalogModule {
     `).join('');
   }
 
+  /**
+   * Menentukan klasifikasi ketersediaan stok produk
+   * @param {number} stock
+   * @returns {'out'|'low'|'normal'}
+   */
+  getStockStatus(stock) {
+    if (stock <= 0) return 'out';
+    if (stock <= 5) return 'low';
+    return 'normal';
+  }
+
   renderProducts(state = store.getState()) {
     if (!this.productsGridEl) return;
 
