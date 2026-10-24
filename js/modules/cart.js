@@ -248,6 +248,20 @@ class CartModule {
     if (btnClear) {
       btnClear.addEventListener('click', () => this.clearCart());
     }
+
+    if (this.customerNameInput) {
+      this.customerNameInput.addEventListener('input', (e) => {
+        const { customer } = store.getState();
+        store.setState({ customer: { ...customer, name: e.target.value.trim() || 'Pelanggan Umum' } });
+      });
+    }
+
+    if (this.customerTableInput) {
+      this.customerTableInput.addEventListener('input', (e) => {
+        const { customer } = store.getState();
+        store.setState({ customer: { ...customer, note: e.target.value.trim() } });
+      });
+    }
     if (this.taxToggleEl) {
       this.taxToggleEl.addEventListener('change', (e) => {
         store.setState({ isTaxActive: e.target.checked });
