@@ -191,8 +191,46 @@ class CartModule {
     return Math.round(taxableAmount * APP_CONFIG.financial.defaultTaxRate);
   }
 
+  /**
+   * Menghitung potongan nominal dari diskon aktif
+   * @param {number} subtotal
+   * @param {Object} discount
+   * @returns {number}
+   */
+  calculateDiscountAmount(subtotal, discount) {
+    if (!discount || discount.value <= 0 || subtotal <= 0) return 0;
+
+    if (discount.type === 'percentage') {
+      return Math.round(subtotal * (discount.value / 100));
+    }
+    if (discount.type === 'fixed') {
+      return Math.min(discount.value, subtotal);
+    }
+    return 0;
+  }
+
   calculateAllTotals(subtotal, discount, isTaxActive) {
-    // Akan diintegrasikan dengan diskon dan grand total
+    const discountAmount = this.calculateDiscountAmount(subtotal, discount);
+    const afterDiscount = Math.max(0, subtotal - discountAmount);
+    const taxAmount = this.calculateTax(afterDiscount, isTaxActive);
+    const grandTotal = afterDiscount + taxAmount;
+
+    if (this.discountEl) {
+      this.discountEl.textContent = discountAmount > 0 ? `- ${formatRupiah(discountAmount)}` : 'Rp 0';
+    }
+    if (this.taxEl) {
+      this.taxEl.textContent = formatRupiah(taxAmount);
+    }
+    if (this.grandTotalEl) {
+      this.grandTotalEl.textContent = formatRupiah(grandTotal);
+    }
+    if (this.btnCheckoutTotal) {
+      this.btnCheckoutTotal.textContent = formatRupiah(grandTotal);
+    }
+
+    if (this.btnCheckout) {
+      this.btnCheckout.disabled = grandTotal <= 0;
+    }
   }
 
   setupListeners() {
