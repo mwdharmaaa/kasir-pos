@@ -122,3 +122,37 @@ class HistoryModule {
 }
 
 export const historyModule = new HistoryModule();
+
+  /**
+   * Membatalkan transaksi (*void*) dan mengembalikan stok barang ke gudang
+   * @param {string} transactionId
+   */
+  voidTransaction(transactionId) {
+    const { transactions, products } = store.getState();
+    const trxToVoid = transactions.find(t => t.id === transactionId);
+    if (!trxToVoid) return;
+
+    if (!confirm(`Batalkan transaksi ${transactionId}? Stok barang akan dikembalikan ke gudang.`)) {
+      return;
+    }
+
+    // Kembalikan stok produk
+    const updatedProducts = products.map(p => {
+      const soldItem = trxToVoid.items.find(i => i.id === p.id);
+      if (soldItem) {
+        return { ...p, stock: p.stock + soldItem.qty };
+      }
+      return p;
+    });
+
+    // Hapus dari riwayat transaksi
+    const updatedTransactions = transactions.filter(t => t.id !== transactionId);
+
+    store.setState({
+      products: updatedProducts,
+      transactions: updatedTransactions
+    });
+
+    toast.show(`Transaksi ${transactionId} berhasil dibatalkan dan stok dikembalikan.`, 'warning');
+    this.renderHistory();
+  }
