@@ -1,4 +1,4 @@
-# ⌨️ Kartu Referensi Tombol Pintas Keyboard Kasir
+# Kartu Referensi Tombol Pintas Keyboard Kasir
 
 Gunakan tombol cepat di bawah ini untuk mengoperasikan kasir secepat kilat tanpa perlu menyentuh mouse:
 

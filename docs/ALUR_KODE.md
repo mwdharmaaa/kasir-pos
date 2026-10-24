@@ -1,4 +1,4 @@
-# 🧭 Panduan Membaca Alur Kode Kasir POS
+# Panduan Membaca Alur Kode Kasir POS
 
 Dokumen ini ditulis untuk membantumu menelusuri bagaimana data dan aksi berjalan di dalam aplikasi ini dari awal sampai akhir.
 

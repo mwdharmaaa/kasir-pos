@@ -1,4 +1,4 @@
-# 📖 Panduan Operasional Kasir (Manual Kasir POS)
+# Panduan Operasional Kasir (Manual Kasir POS)
 
 Selamat datang di aplikasi Kasir POS Modern. Panduan ini menjelaskan tata cara transaksi sehari-hari bagi staf kasir.
 

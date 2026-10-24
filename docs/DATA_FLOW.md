@@ -1,4 +1,4 @@
-# 🔄 Diagram Alur Data (State Management)
+# Diagram Alur Data (State Management)
 
 Aplikasi ini menggunakan pola **Centralized State** sederhana tanpa framework luar. Semua perubahan data mengalir satu arah (*Single Source of Truth*).
 
