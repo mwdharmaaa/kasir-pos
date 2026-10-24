@@ -83,46 +83,6 @@ class HistoryModule {
     `).join('');
   }
 
-  setupTableActions() {
-    if (!this.tableBodyEl) return;
-    this.tableBodyEl.addEventListener('click', (e) => {
-      const reprintBtn = e.target.closest('.btn-reprint');
-      const voidBtn = e.target.closest('.btn-void');
-
-      if (reprintBtn) {
-        const { transactions } = store.getState();
-        const trx = transactions.find(t => t.id === reprintBtn.dataset.id);
-        if (trx) {
-          window.dispatchEvent(new CustomEvent('pos:show-receipt', { detail: { transaction: trx } }));
-        }
-      } else if (voidBtn) {
-        this.voidTransaction(voidBtn.dataset.id);
-      }
-    });
-  }
-
-  setupListeners() {
-    this.setupTableActions();
-    const btnOpen = document.getElementById('btn-open-history');
-    if (btnOpen) {
-      btnOpen.addEventListener('click', () => this.openModal());
-    }
-
-    if (this.searchInputEl) {
-      this.searchInputEl.addEventListener('input', (e) => {
-        this.renderHistory(e.target.value);
-      });
-    }
-
-    if (this.modalEl) {
-      const closeBtns = this.modalEl.querySelectorAll('[data-close-modal]');
-      closeBtns.forEach(b => b.addEventListener('click', () => this.closeModal()));
-    }
-  }
-}
-
-export const historyModule = new HistoryModule();
-
   /**
    * Membatalkan transaksi (*void*) dan mengembalikan stok barang ke gudang
    * @param {string} transactionId
@@ -156,3 +116,44 @@ export const historyModule = new HistoryModule();
     toast.show(`Transaksi ${transactionId} berhasil dibatalkan dan stok dikembalikan.`, 'warning');
     this.renderHistory();
   }
+
+  setupTableActions() {
+    if (!this.tableBodyEl) return;
+    this.tableBodyEl.addEventListener('click', (e) => {
+      const reprintBtn = e.target.closest('.btn-reprint');
+      const voidBtn = e.target.closest('.btn-void');
+
+      if (reprintBtn) {
+        const { transactions } = store.getState();
+        const trx = transactions.find(t => t.id === reprintBtn.dataset.id);
+        if (trx) {
+          window.dispatchEvent(new CustomEvent('pos:show-receipt', { detail: { transaction: trx } }));
+        }
+      } else if (voidBtn) {
+        this.voidTransaction(voidBtn.dataset.id);
+      }
+    });
+  }
+
+  setupListeners() {
+    this.setupTableActions();
+
+    const btnOpen = document.getElementById('btn-open-history');
+    if (btnOpen) {
+      btnOpen.addEventListener('click', () => this.openModal());
+    }
+
+    if (this.searchInputEl) {
+      this.searchInputEl.addEventListener('input', (e) => {
+        this.renderHistory(e.target.value);
+      });
+    }
+
+    if (this.modalEl) {
+      const closeBtns = this.modalEl.querySelectorAll('[data-close-modal]');
+      closeBtns.forEach(b => b.addEventListener('click', () => this.closeModal()));
+    }
+  }
+}
+
+export const historyModule = new HistoryModule();

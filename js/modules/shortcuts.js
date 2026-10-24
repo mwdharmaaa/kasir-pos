@@ -15,6 +15,20 @@ import { historyModule } from './history.js';
 
 class ShortcutsModule {
   init() {
+    const btnShortcuts = document.getElementById('btn-open-shortcuts');
+    const modalShortcuts = document.getElementById('modal-shortcuts');
+
+    if (btnShortcuts && modalShortcuts) {
+      btnShortcuts.addEventListener('click', () => {
+        modalShortcuts.style.display = 'flex';
+      });
+
+      const closeBtns = modalShortcuts.querySelectorAll('[data-close-modal]');
+      closeBtns.forEach(b => b.addEventListener('click', () => {
+        modalShortcuts.style.display = 'none';
+      }));
+    }
+
     window.addEventListener('keydown', (e) => {
       // 1. F2 -> Fokus pencarian produk
       if (e.key === 'F2') {

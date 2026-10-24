@@ -243,7 +243,78 @@ class CartModule {
     }
   }
 
+  openDiscountModal() {
+    const modal = document.getElementById('modal-discount');
+    if (modal) modal.style.display = 'flex';
+  }
+
+  closeDiscountModal() {
+    const modal = document.getElementById('modal-discount');
+    if (modal) modal.style.display = 'none';
+  }
+
+  setupDiscountListeners() {
+    const btnPromo = document.getElementById('btn-edit-discount');
+    const modalDiscount = document.getElementById('modal-discount');
+
+    if (btnPromo) {
+      btnPromo.addEventListener('click', () => this.openDiscountModal());
+    }
+
+    if (modalDiscount) {
+      const closeBtns = modalDiscount.querySelectorAll('[data-close-modal]');
+      closeBtns.forEach(b => b.addEventListener('click', () => this.closeDiscountModal()));
+
+      // Presets 0%, 5%, 10%, 20%
+      modalDiscount.querySelectorAll('.btn-preset-discount').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const val = Number(btn.dataset.val);
+          store.setState({
+            discount: {
+              type: 'percentage',
+              value: val,
+              label: val > 0 ? `Diskon ${val}%` : 'Tidak ada diskon',
+              code: ''
+            }
+          });
+          sound.playBeep();
+          toast.show(val > 0 ? `Diskon ${val}% diterapkan` : 'Diskon dinonaktifkan', 'info');
+          this.closeDiscountModal();
+        });
+      });
+
+      // Kupon promo
+      const btnApply = document.getElementById('btn-apply-coupon');
+      const inputCoupon = document.getElementById('coupon-code-input');
+      if (btnApply && inputCoupon) {
+        btnApply.addEventListener('click', () => {
+          const code = inputCoupon.value.trim().toUpperCase();
+          const coupon = APP_CONFIG.discountCoupons[code];
+
+          if (coupon) {
+            store.setState({
+              discount: {
+                type: coupon.type,
+                value: coupon.value,
+                label: coupon.label,
+                code: code
+              }
+            });
+            sound.playSuccess();
+            toast.show(`Kupon ${code} berhasil diterapkan!`, 'success');
+            this.closeDiscountModal();
+          } else {
+            sound.playError();
+            toast.show(`Kode kupon "${code}" tidak valid`, 'warning');
+          }
+        });
+      }
+    }
+  }
+
   setupListeners() {
+    this.setupDiscountListeners();
+
     const btnClear = document.getElementById('btn-clear-cart');
     if (btnClear) {
       btnClear.addEventListener('click', () => this.clearCart());

@@ -47,9 +47,6 @@ class ExportImportModule {
 
     toast.show('Laporan penjualan CSV berhasil diunduh!', 'success');
   }
-}
-
-export const exportImportModule = new ExportImportModule();
 
   /**
    * Mencadangkan seluruh database (produk, transaksi, pengaturan) ke file JSON
@@ -66,3 +63,6 @@ export const exportImportModule = new ExportImportModule();
     URL.revokeObjectURL(url);
     toast.show('Backup database JSON berhasil disimpan!', 'success');
   }
+}
+
+export const exportImportModule = new ExportImportModule();

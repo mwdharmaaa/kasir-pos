@@ -395,6 +395,60 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal Pilihan Diskon & Promo -->
+    <div id="modal-discount" class="pos-modal-backdrop" style="display: none;">
+      <div class="pos-modal-window" style="max-width: 440px;">
+        <div class="pos-modal-header">
+          <h3 class="pos-modal-title">Pilih Diskon & Promo</h3>
+          <button class="modal-close-btn" data-close-modal>&times;</button>
+        </div>
+        <div class="pos-modal-body">
+          <p style="font-size: var(--text-xs); color: var(--text-muted); margin-bottom: var(--space-3);">
+            Pilih persentase diskon cepat atau masukkan kode kupon promo:
+          </p>
+          <div class="quick-cash-chips" style="margin-bottom: var(--space-4);">
+            <button class="quick-chip-btn btn-preset-discount" data-val="0">Tanpa Diskon (0%)</button>
+            <button class="quick-chip-btn btn-preset-discount" data-val="5">Diskon 5%</button>
+            <button class="quick-chip-btn btn-preset-discount" data-val="10">Diskon 10%</button>
+            <button class="quick-chip-btn btn-preset-discount" data-val="20">Diskon 20%</button>
+          </div>
+          <div style="display: flex; gap: var(--space-2);">
+            <input type="text" id="coupon-code-input" placeholder="Kode promo (cth: HEMAT10)" style="flex: 1; text-transform: uppercase;">
+            <button id="btn-apply-coupon" class="btn-checkout-finish">Terapkan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Panduan Tombol Pintas (Shortcuts Guide) -->
+    <div id="modal-shortcuts" class="pos-modal-backdrop" style="display: none;">
+      <div class="pos-modal-window" style="max-width: 520px;">
+        <div class="pos-modal-header">
+          <h3 class="pos-modal-title">Daftar Tombol Pintas Keyboard</h3>
+          <button class="modal-close-btn" data-close-modal>&times;</button>
+        </div>
+        <div class="pos-modal-body">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>Tombol</th>
+                <th>Fungsi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><b>F2</b></td><td>Fokus ke kotak pencarian produk / barcode</td></tr>
+              <tr><td><b>Enter</b></td><td>Tambah produk yang barcode-nya cocok secara instan</td></tr>
+              <tr><td><b>F4</b></td><td>Tahan pesanan saat ini (Hold Bill)</td></tr>
+              <tr><td><b>F8</b></td><td>Buka riwayat transaksi penjualan</td></tr>
+              <tr><td><b>F9</b></td><td>Buka jendela pembayaran (Checkout)</td></tr>
+              <tr><td><b>Esc</b></td><td>Tutup jendela pop-up / modal yang sedang aktif</td></tr>
+              <tr><td><b>1 - 4</b></td><td>Ganti metode bayar saat di jendela pembayaran</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Core Scripts -->

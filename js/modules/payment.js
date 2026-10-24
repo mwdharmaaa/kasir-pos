@@ -127,6 +127,34 @@ class PaymentModule {
     this.validatePayment();
   }
 
+  renderQuickCashChips() {
+    const container = document.getElementById('quick-cash-chips');
+    if (!container) return;
+
+    const suggestions = [
+      { label: 'Uang Pas', amount: this.currentTotal },
+      ...APP_CONFIG.quickCashPresets
+        .filter(amt => amt >= this.currentTotal)
+        .slice(0, 4)
+        .map(amt => ({ label: formatRupiah(amt), amount: amt }))
+    ];
+
+    container.innerHTML = suggestions.map(s => `
+      <button class="quick-chip-btn" data-amount="${s.amount}">${s.label}</button>
+    `).join('');
+
+    container.querySelectorAll('.quick-chip-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const amt = Number(btn.dataset.amount);
+        this.cashReceived = amt;
+        const input = document.getElementById('cash-received-input');
+        if (input) input.value = amt;
+        this.updateChangeCalculation();
+        sound.playBeep();
+      });
+    });
+  }
+
   setupCashListeners() {
     const input = document.getElementById('cash-received-input');
     if (input) {
@@ -142,8 +170,6 @@ class PaymentModule {
 
   updateChangeCalculation() {
     const changeEl = document.getElementById('cash-change-amount');
-    const changeBox = document.getElementById('change-display-box');
-
     this.changeAmount = this.cashReceived - this.currentTotal;
 
     if (changeEl) {
@@ -167,32 +193,6 @@ class PaymentModule {
       this.btnSubmit.disabled = false;
     }
   }
-
-  setupListeners() {
-    const btnOpen = document.getElementById('btn-open-payment');
-    if (btnOpen) {
-      btnOpen.addEventListener('click', () => this.openPaymentModal());
-    }
-
-    if (this.methodsGridEl) {
-      this.methodsGridEl.addEventListener('click', (e) => {
-        const btn = e.target.closest('.pay-method-btn');
-        if (btn) this.switchMethod(btn.dataset.methodId);
-      });
-    }
-
-    if (this.modalEl) {
-      const closeBtns = this.modalEl.querySelectorAll('[data-close-modal]');
-      closeBtns.forEach(b => b.addEventListener('click', () => this.closeModal()));
-    }
-
-    if (this.btnSubmit) {
-      this.btnSubmit.addEventListener('click', () => this.processCheckout());
-    }
-  }
-}
-
-export const paymentModule = new PaymentModule();
 
   renderQRISPanel() {
     this.channelPanelEl.innerHTML = `
@@ -292,6 +292,32 @@ export const paymentModule = new PaymentModule();
     // Trigger event untuk menampilkan struk termal
     window.dispatchEvent(new CustomEvent('pos:show-receipt', { detail: { transaction } }));
   }
+
+  setupListeners() {
+    const btnOpen = document.getElementById('btn-open-payment');
+    if (btnOpen) {
+      btnOpen.addEventListener('click', () => this.openPaymentModal());
+    }
+
+    if (this.methodsGridEl) {
+      this.methodsGridEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('.pay-method-btn');
+        if (btn) this.switchMethod(btn.dataset.methodId);
+      });
+    }
+
+    if (this.modalEl) {
+      const closeBtns = this.modalEl.querySelectorAll('[data-close-modal]');
+      closeBtns.forEach(b => b.addEventListener('click', () => this.closeModal()));
+    }
+
+    if (this.btnSubmit) {
+      this.btnSubmit.addEventListener('click', () => this.processCheckout());
+    }
+  }
+}
+
+export const paymentModule = new PaymentModule();
 
 export function getLastTransaction() {
   const { transactions } = store.getState();

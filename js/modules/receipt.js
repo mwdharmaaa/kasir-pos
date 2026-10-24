@@ -142,23 +142,6 @@ class ReceiptModule {
     window.print();
   }
 
-  setupListeners() {
-    if (this.btnPrint) {
-      this.btnPrint.addEventListener('click', () => this.printReceipt());
-    }
-
-    if (this.btnDownloadTxt) {
-      this.btnDownloadTxt.addEventListener('click', () => this.downloadAsText());
-    }
-    if (this.modalEl) {
-      const closeBtns = this.modalEl.querySelectorAll('[data-close-modal]');
-      closeBtns.forEach(b => b.addEventListener('click', () => this.closeModal()));
-    }
-  }
-}
-
-export const receiptModule = new ReceiptModule();
-
   /**
    * Mengunduh struk dalam bentuk file teks (.txt) monospaced
    */
@@ -202,3 +185,21 @@ export const receiptModule = new ReceiptModule();
     a.click();
     URL.revokeObjectURL(url);
   }
+
+  setupListeners() {
+    if (this.btnPrint) {
+      this.btnPrint.addEventListener('click', () => this.printReceipt());
+    }
+
+    if (this.btnDownloadTxt) {
+      this.btnDownloadTxt.addEventListener('click', () => this.downloadAsText());
+    }
+
+    if (this.modalEl) {
+      const closeBtns = this.modalEl.querySelectorAll('[data-close-modal]');
+      closeBtns.forEach(b => b.addEventListener('click', () => this.closeModal()));
+    }
+  }
+}
+
+export const receiptModule = new ReceiptModule();
