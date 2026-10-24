@@ -93,7 +93,40 @@ class InventoryModule {
   }
 
   handleAddProduct(e) {
-    // Akan diisi logika tambah produk
+    e.preventDefault();
+    const name = document.getElementById('inv-name').value.trim();
+    const category = document.getElementById('inv-category').value;
+    const price = Number(document.getElementById('inv-price').value) || 0;
+    const stock = Number(document.getElementById('inv-stock').value) || 0;
+    const barcode = document.getElementById('inv-barcode').value.trim() || `899${Date.now().toString().slice(-7)}`;
+    const icon = document.getElementById('inv-icon').value.trim() || '📦';
+
+    if (!name || price <= 0) {
+      toast.show('Mohon lengkapi nama dan harga produk yang valid', 'warning');
+      return;
+    }
+
+    const { products } = store.getState();
+    const newProduct = {
+      id: `prod-${Date.now()}`,
+      name,
+      category,
+      price,
+      costPrice: price * 0.6,
+      stock,
+      barcode,
+      icon,
+      description: 'Produk ditambahkan manual dari kasir.'
+    };
+
+    store.setState({
+      products: [newProduct, ...products]
+    });
+
+    sound.playSuccess();
+    toast.show(`Produk "${name}" berhasil ditambahkan!`, 'success');
+    this.formAddEl.reset();
+    this.renderInventory();
   }
 }
 
