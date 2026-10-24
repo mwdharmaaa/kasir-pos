@@ -1,10 +1,3 @@
-/**
- * @file payment.js
- * @description Modul Pemrosesan Pembayaran (Payment Gateway).
- * Menangani pemilihan kanal bayar, kalkulasi uang tunai & kembalian,
- * QRIS timer, serta finalisasi transaksi.
- */
-
 import { store } from '../state/state.js';
 import { APP_CONFIG } from '../config.js';
 import { formatRupiah, parseRupiah } from '../utils/formatters.js';
@@ -40,7 +33,6 @@ class PaymentModule {
     const { cart, discount, isTaxActive } = store.getState();
     if (cart.length === 0) return;
 
-    // Hitung total akhir yang harus dibayar
     const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
     const discAmount = discount.type === 'percentage' 
       ? Math.round(subtotal * (discount.value / 100))
@@ -99,7 +91,7 @@ class PaymentModule {
   }
 
   renderCashPanel() {
-    this.cashReceived = this.currentTotal; // Default uang pas
+    this.cashReceived = this.currentTotal;
     this.changeAmount = 0;
 
     this.channelPanelEl.innerHTML = `
@@ -234,14 +226,10 @@ class PaymentModule {
     this.validatePayment();
   }
 
-  /**
-   * Menyelesaikan transaksi: mengurangi stok barang dan menyimpan riwayat
-   */
   processCheckout() {
     const { cart, products, customer, discount, isTaxActive, transactions } = store.getState();
     if (cart.length === 0) return;
 
-    // 1. Potong stok setiap produk yang dibeli
     const updatedProducts = products.map(p => {
       const inCart = cart.find(c => c.id === p.id);
       if (inCart) {
@@ -250,7 +238,6 @@ class PaymentModule {
       return p;
     });
 
-    // 2. Kalkulasi detail finansial
     const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
     const discAmount = discount.type === 'percentage' 
       ? Math.round(subtotal * (discount.value / 100))
@@ -259,7 +246,6 @@ class PaymentModule {
     const taxAmount = isTaxActive ? Math.round(taxable * APP_CONFIG.financial.defaultTaxRate) : 0;
     const grandTotal = taxable + taxAmount;
 
-    // 3. Bangun objek transaksi
     const transaction = {
       id: generateTransactionId(),
       date: new Date().toISOString(),
@@ -276,11 +262,10 @@ class PaymentModule {
       changeAmount: this.selectedMethod === 'cash' ? Math.max(0, this.changeAmount) : 0
     };
 
-    // 4. Update State Store
     store.setState({
       products: updatedProducts,
       transactions: [transaction, ...transactions],
-      cart: [], // Kosongkan keranjang
+      cart: [],
       discount: { type: 'percentage', value: 0, label: 'Tidak ada diskon', code: '' }
     });
 
@@ -289,7 +274,6 @@ class PaymentModule {
 
     this.closeModal();
 
-    // Trigger event untuk menampilkan struk termal
     window.dispatchEvent(new CustomEvent('pos:show-receipt', { detail: { transaction } }));
   }
 

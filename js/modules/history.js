@@ -1,10 +1,3 @@
-/**
- * @file history.js
- * @description Modul Riwayat Transaksi.
- * Menampilkan daftar transaksi yang sudah selesai, memungkinkan cetak ulang struk,
- * pencarian data lama, dan pembatalan transaksi (*void*).
- */
-
 import { store } from '../state/state.js';
 import { formatRupiah } from '../utils/formatters.js';
 import { formatTime24h } from '../utils/date-helpers.js';
@@ -47,7 +40,6 @@ class HistoryModule {
     if (!this.tableBodyEl) return;
     const { transactions } = store.getState();
 
-    // Filter pencarian dan urutkan transaksi terbaru di atas
     const filtered = transactions.filter(t => {
       const q = query.toLowerCase().trim();
       return t.id.toLowerCase().includes(q) || t.customerName.toLowerCase().includes(q);
@@ -83,10 +75,6 @@ class HistoryModule {
     `).join('');
   }
 
-  /**
-   * Membatalkan transaksi (*void*) dan mengembalikan stok barang ke gudang
-   * @param {string} transactionId
-   */
   voidTransaction(transactionId) {
     const { transactions, products } = store.getState();
     const trxToVoid = transactions.find(t => t.id === transactionId);
@@ -96,7 +84,6 @@ class HistoryModule {
       return;
     }
 
-    // Kembalikan stok produk
     const updatedProducts = products.map(p => {
       const soldItem = trxToVoid.items.find(i => i.id === p.id);
       if (soldItem) {
@@ -105,7 +92,6 @@ class HistoryModule {
       return p;
     });
 
-    // Hapus dari riwayat transaksi
     const updatedTransactions = transactions.filter(t => t.id !== transactionId);
 
     store.setState({

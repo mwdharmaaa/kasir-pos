@@ -1,8 +1,3 @@
-/**
- * @file theme.js
- * @description Switcher mode gelap (Dark Mode) dengan penyimpanan preferensi di localStorage.
- */
-
 import { storage } from '../storage/storage.js';
 
 class ThemeModule {

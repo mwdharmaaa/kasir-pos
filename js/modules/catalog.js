@@ -1,9 +1,3 @@
-/**
- * @file catalog.js
- * @description Modul pengelola katalog: render filter kategori, kartu produk,
- * dan fitur pencarian teks / barcode scanner.
- */
-
 import { store } from '../state/state.js';
 import { formatRupiah } from '../utils/formatters.js';
 import { sound } from '../utils/sound.js';
@@ -27,7 +21,6 @@ class CatalogModule {
     this.renderProducts();
     this.setupListeners();
 
-    // Subscribe ke perubahan state (misal saat stok berkurang atau filter berganti)
     store.subscribe((state) => {
       this.renderProducts(state);
     });
@@ -47,11 +40,6 @@ class CatalogModule {
     `).join('');
   }
 
-  /**
-   * Menentukan klasifikasi ketersediaan stok produk
-   * @param {number} stock
-   * @returns {'out'|'low'|'normal'}
-   */
   getStockStatus(stock) {
     if (stock <= 0) return 'out';
     if (stock <= 5) return 'low';
@@ -63,7 +51,6 @@ class CatalogModule {
 
     const { products, activeCategory, searchQuery } = state;
 
-    // Filter berdasarkan kategori dan teks pencarian
     const filteredProducts = products.filter(product => {
       const matchCategory = activeCategory === 'all' || product.category === activeCategory;
       const query = searchQuery.toLowerCase().trim();
@@ -131,11 +118,9 @@ class CatalogModule {
         sound.playError();
         toast.show(`Stok produk "${product.name}" sudah habis!`, 'danger');
       } else {
-        // Trigger event custom untuk ditangkap oleh cartModule
         window.dispatchEvent(new CustomEvent('pos:add-to-cart', { detail: { productId: product.id } }));
         sound.playBeep();
         toast.show(`Ditambahkan: ${product.name}`, 'success');
-        // Bersihkan input barcode setelah scan berhasil
         this.clearSearch();
       }
     } else {
@@ -182,7 +167,6 @@ class CatalogModule {
         }
       });
 
-      // Deteksi Enter key (biasanya dikirim otomatis oleh pemindai barcode fisik)
       this.searchInputEl.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();

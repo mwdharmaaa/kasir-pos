@@ -1,9 +1,3 @@
-/**
- * @file inventory.js
- * @description Modul Manajemen Inventaris Produk & Stok Gudang.
- * Menangani penambahan produk baru, penyesuaian stok langsung, dan penghapusan item.
- */
-
 import { store } from '../state/state.js';
 import { formatRupiah } from '../utils/formatters.js';
 import { toast } from '../utils/toast.js';
@@ -91,7 +85,6 @@ class InventoryModule {
   setupTableActions() {
     if (!this.tableBodyEl) return;
 
-    // Listener ganti stok langsung dari input
     this.tableBodyEl.addEventListener('change', (e) => {
       const stockInput = e.target.closest('.stock-input-mini');
       if (stockInput) {
@@ -105,7 +98,6 @@ class InventoryModule {
       }
     });
 
-    // Listener tombol hapus produk
     this.tableBodyEl.addEventListener('click', (e) => {
       const deleteBtn = e.target.closest('.btn-delete-product');
       if (deleteBtn) {

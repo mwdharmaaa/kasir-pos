@@ -1,10 +1,3 @@
-/**
- * @file state.js
- * @description Centralized State Store untuk Kasir POS.
- * Mengelola seluruh data aktif dalam sesi (Cart, Products, Filters, Discounts)
- * dengan pola observer/listener sederhana.
- */
-
 import { storage } from '../storage/storage.js';
 import { INITIAL_PRODUCTS, INITIAL_CATEGORIES } from '../data/sample-data.js';
 import { APP_CONFIG } from '../config.js';
@@ -13,7 +6,6 @@ class StateStore {
   constructor() {
     this.listeners = [];
     
-    // Inisialisasi state dari localStorage atau default
     const savedProducts = storage.get('products');
     const savedTransactions = storage.get('transactions', []);
     const savedHeldOrders = storage.get('held_orders', []);
@@ -25,7 +17,7 @@ class StateStore {
       activeCategory: 'all',
       searchQuery: '',
       discount: {
-        type: 'percentage', // 'percentage' | 'fixed'
+        type: 'percentage',
         value: 0,
         label: 'Tidak ada diskon',
         code: ''
@@ -40,23 +32,15 @@ class StateStore {
       activeModal: null
     };
 
-    // Simpan ke storage jika baru pertama kali dibuat
     if (!savedProducts) {
       storage.set('products', this._state.products);
     }
   }
 
-  /**
-   * Mengambil snapshot state saat ini
-   */
   getState() {
     return this._state;
   }
 
-  /**
-   * Mendaftarkan listener untuk merespons perubahan state
-   * @param {Function} listener
-   */
   subscribe(listener) {
     this.listeners.push(listener);
     return () => {
@@ -64,17 +48,12 @@ class StateStore {
     };
   }
 
-  /**
-   * Memperbarui sebagian properti state dan memberi tahu seluruh listener
-   * @param {Object} partialState
-   */
   setState(partialState) {
     this._state = {
       ...this._state,
       ...partialState
     };
 
-    // Sinkronisasi otomatis ke storage untuk data persisten tertentu
     if ('products' in partialState) {
       storage.set('products', this._state.products);
     }
@@ -85,7 +64,6 @@ class StateStore {
       storage.set('held_orders', this._state.heldOrders);
     }
 
-    // Panggil semua subscriber
     this.listeners.forEach(fn => fn(this._state));
   }
 }

@@ -1,8 +1,3 @@
-/**
- * @file export-import.js
- * @description Modul Ekspor Data CSV dan Backup Database JSON.
- */
-
 import { store } from '../state/state.js';
 import { toast } from '../utils/toast.js';
 
@@ -14,9 +9,6 @@ class ExportImportModule {
     }
   }
 
-  /**
-   * Mengekspor seluruh riwayat transaksi ke format file .csv spreadsheet
-   */
   exportTransactionsCSV() {
     const { transactions } = store.getState();
     if (transactions.length === 0) {
@@ -48,9 +40,6 @@ class ExportImportModule {
     toast.show('Laporan penjualan CSV berhasil diunduh!', 'success');
   }
 
-  /**
-   * Mencadangkan seluruh database (produk, transaksi, pengaturan) ke file JSON
-   */
   exportFullBackupJSON() {
     const fullState = store.getState();
     const jsonStr = JSON.stringify(fullState, null, 2);

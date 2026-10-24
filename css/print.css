@@ -1,10 +1,9 @@
 @media print {
-  /* Sembunyikan semua elemen aplikasi utama */
+  
   body * {
     visibility: hidden;
   }
 
-  /* Tampilkan hanya area struk termal */
   #modal-receipt,
   #modal-receipt * {
     visibility: visible;

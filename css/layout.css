@@ -14,7 +14,6 @@
   height: calc(100vh - 64px);
 }
 
-/* Left Section: Catalog Area */
 .catalog-section {
   display: flex;
   flex-direction: column;
@@ -25,7 +24,6 @@
   gap: var(--space-4);
 }
 
-/* Right Section: Cart & Billing Area */
 .cart-section {
   display: flex;
   flex-direction: column;
@@ -34,7 +32,6 @@
   box-shadow: -4px 0 15px rgba(0, 0, 0, 0.03);
 }
 
-/* Responsive breakpoint for smaller screens / tablets */
 @media (max-width: 992px) {
   .main-content {
     grid-template-columns: 1fr;

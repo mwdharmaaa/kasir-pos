@@ -1,9 +1,3 @@
-/**
- * @file sample-data.js
- * @description Data awal katalog produk ritel & kuliner khas Indonesia.
- * Digunakan saat aplikasi pertama kali dijalankan.
- */
-
 export const INITIAL_CATEGORIES = [
   { id: 'all', name: 'Semua Produk', icon: '' },
   { id: 'makanan', name: 'Makanan', icon: '' },
@@ -107,7 +101,7 @@ export const INITIAL_PRODUCTS = [
     category: 'sembako',
     price: 19500,
     costPrice: 16500,
-    stock: 5, // Stok sedikit untuk tes status low-stock
+    stock: 5,
     barcode: '8991001009',
     icon: 'SBK',
     description: 'Minyak goreng kelapa sawit murni kualitas premium.'
@@ -118,7 +112,7 @@ export const INITIAL_PRODUCTS = [
     category: 'sembako',
     price: 17500,
     costPrice: 15000,
-    stock: 0, // Stok habis untuk tes guard stok kosong
+    stock: 0,
     barcode: '8991001010',
     icon: 'SBK',
     description: 'Gula tebu putih higienis manis alami.'

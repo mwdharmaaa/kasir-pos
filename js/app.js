@@ -1,9 +1,3 @@
-/**
- * @file app.js
- * @description Titik masuk utama aplikasi (Application Bootstrap).
- * Menginisialisasi dan menghubungkan seluruh modul kasir saat DOM siap.
- */
-
 import { headerModule } from './modules/header.js';
 import { themeModule } from './modules/theme.js';
 import { catalogModule } from './modules/catalog.js';
@@ -20,9 +14,6 @@ import { exportImportModule } from './modules/export-import.js';
 
 class App {
   static init() {
-    console.log('%cKasir POS Modern Siap Digunakan', 'color: #10b981; font-weight: bold; font-size: 14px;');
-
-    // Inisialisasi setiap modul
     themeModule.init();
     headerModule.init();
     catalogModule.init();
@@ -39,7 +30,6 @@ class App {
   }
 }
 
-// Jalankan ketika seluruh elemen DOM siap dimanipulasi
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => App.init());
 } else {
