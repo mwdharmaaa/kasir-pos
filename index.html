@@ -183,6 +183,40 @@
 
   <!-- Container Modal Popups -->
   <div id="modal-container">
+    <!-- Modal Pengaturan Toko (Store Settings) -->
+    <div id="modal-settings" class="pos-modal-backdrop" style="display: none;">
+      <div class="pos-modal-window" style="max-width: 500px;">
+        <div class="pos-modal-header">
+          <h3 class="pos-modal-title">⚙️ Pengaturan Toko & POS</h3>
+          <button class="modal-close-btn" data-close-modal>&times;</button>
+        </div>
+        <div class="pos-modal-body">
+          <form id="form-settings" style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <div>
+              <label class="cash-label">Nama Toko:</label>
+              <input type="text" id="setting-store-name" style="width: 100%;">
+            </div>
+            <div>
+              <label class="cash-label">Alamat Toko:</label>
+              <input type="text" id="setting-store-address" style="width: 100%;">
+            </div>
+            <div>
+              <label class="cash-label">Nomor Telepon:</label>
+              <input type="text" id="setting-store-phone" style="width: 100%;">
+            </div>
+            <div>
+              <label class="cash-label">Catatan Kaki Struk (Receipt Footer):</label>
+              <input type="text" id="setting-store-footer" style="width: 100%;">
+            </div>
+            <div style="margin-top: var(--space-2); display: flex; gap: var(--space-2);">
+              <button type="submit" class="btn-checkout-finish">Simpan Perubahan</button>
+              <button type="button" id="btn-backup-json" class="cart-tool-btn">💾 Backup Data</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <!-- Modal Kelola Produk & Stok (Inventory Management) -->
     <div id="modal-inventory" class="pos-modal-backdrop" style="display: none;">
       <div class="pos-modal-window inventory-modal-window">
