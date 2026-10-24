@@ -89,7 +89,39 @@ class InventoryModule {
   }
 
   setupTableActions() {
-    // Akan diisi listener edit stok dan hapus produk
+    if (!this.tableBodyEl) return;
+
+    // Listener ganti stok langsung dari input
+    this.tableBodyEl.addEventListener('change', (e) => {
+      const stockInput = e.target.closest('.stock-input-mini');
+      if (stockInput) {
+        const prodId = stockInput.dataset.id;
+        const newStock = Math.max(0, parseInt(stockInput.value, 10) || 0);
+
+        const { products } = store.getState();
+        const updated = products.map(p => p.id === prodId ? { ...p, stock: newStock } : p);
+        store.setState({ products: updated });
+        toast.show('Stok berhasil diperbarui', 'info');
+      }
+    });
+
+    // Listener tombol hapus produk
+    this.tableBodyEl.addEventListener('click', (e) => {
+      const deleteBtn = e.target.closest('.btn-delete-product');
+      if (deleteBtn) {
+        const prodId = deleteBtn.dataset.id;
+        const { products } = store.getState();
+        const target = products.find(p => p.id === prodId);
+        if (!target) return;
+
+        if (confirm(`Yakin ingin menghapus produk "${target.name}"?`)) {
+          const updated = products.filter(p => p.id !== prodId);
+          store.setState({ products: updated });
+          toast.show(`Produk "${target.name}" dihapus`, 'info');
+          this.renderInventory();
+        }
+      }
+    });
   }
 
   handleAddProduct(e) {
